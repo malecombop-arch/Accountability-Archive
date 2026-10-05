@@ -6,7 +6,6 @@
     <title>Statutory Accountability & Medical Justice Master Platform</title>
     <meta name="description" content="An open-source, launch-ready multi-page architecture tracking administrative non-performance, file-swapping, and corporate liability across the RAF, COIDA, and RMA.">
     <style>
-        /* --- Core Systemic Root Tokens --- */
         :root {
             --primary-navy: #1B2A4A;
             --secondary-charcoal: #2C3E50;
@@ -21,38 +20,18 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: var(--font-stack); line-height: 1.6; color: var(--text-dark); background-color: #FFFFFF; }
 
-        /* --- Global Structural Navigation Header --- */
-        .global-header {
-            background-color: var(--primary-navy);
-            border-bottom: 3px solid var(--accent-warning);
-            position: sticky; top: 0; z-index: 1000;
-        }
-        .header-container {
-            max-width: 1200px; margin: 0 auto;
-            display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem;
-            flex-wrap: wrap; gap: 1rem;
-        }
-        .brand-identity {
-            color: var(--text-light); font-size: 1.1rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none;
-        }
+        .global-header { background-color: var(--primary-navy); border-bottom: 3px solid var(--accent-warning); position: sticky; top: 0; z-index: 1000; }
+        .header-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; flex-wrap: wrap; gap: 1rem; }
+        .brand-identity { color: var(--text-light); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none; }
         .nav-menu { display: flex; list-style: none; gap: 1rem; align-items: center; flex-wrap: wrap; }
-        .nav-link {
-            color: #E2E8F0; text-decoration: none; font-weight: 500; font-size: 0.9rem;
-            padding: 0.5rem 0.75rem; border-radius: 4px; cursor: pointer; transition: all 0.2s ease;
-        }
+        .nav-link { color: #E2E8F0; text-decoration: none; font-weight: 500; font-size: 0.9rem; padding: 0.5rem 0.75rem; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; }
         .nav-link:hover, .nav-link.active { background-color: var(--secondary-charcoal); color: var(--text-light); }
-        .cta-vault-btn {
-            background-color: var(--accent-warning); color: var(--text-light);
-            padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: 600; text-decoration: none; font-size: 0.85rem;
-        }
+        .cta-vault-btn { background-color: var(--accent-warning); color: var(--text-light); padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: 600; text-decoration: none; font-size: 0.85rem; }
         .cta-vault-btn:hover { background-color: #B71C1C; }
 
-        /* --- Dynamic View Engine Architecture --- */
         .page-view { display: none; padding: 0; }
         .page-view.active-view { display: block; }
 
-        /* --- UI Utility Layout Classes --- */
         .hero-section { background-color: var(--light-bg); padding: 4rem 2rem; border-bottom: 1px solid var(--border-muted); text-align: center; }
         .hero-container { max-width: 850px; margin: 0 auto; }
         .hero-section h1 { color: var(--primary-navy); font-size: 2.2rem; margin-bottom: 1rem; line-height: 1.2; }
@@ -72,7 +51,6 @@
         .content-block p, .section-intro { margin-bottom: 1rem; text-align: justify; color: var(--text-dark); }
         .section-intro { font-size: 1.05rem; max-width: 900px; }
 
-        /* --- Dashboard Status Panels --- */
         .dashboard-panel { background-color: var(--light-bg); border: 1px solid var(--border-muted); border-radius: 6px; padding: 1.5rem; height: fit-content; }
         .dashboard-panel h3 { color: var(--primary-navy); margin-bottom: 1rem; font-size: 1.15rem; text-transform: uppercase; border-bottom: 2px solid var(--border-muted); padding-bottom: 0.5rem; }
         .track-card { background: #FFFFFF; border: 1px solid var(--border-muted); border-radius: 4px; padding: 1rem; margin-bottom: 0.75rem; border-left: 4px solid var(--accent-warning); }
@@ -87,14 +65,12 @@
         .counter-number { font-size: 1.75rem; font-weight: 700; display: block; color: #FEE2E2; }
         .counter-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: #E2E8F0; }
 
-        /* --- Fronts Grid --- */
         .fronts-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
         @media (min-width: 768px) { .fronts-grid { grid-template-columns: repeat(3, 1fr); } }
         .front-card { background: white; padding: 1.5rem; border-radius: 6px; border: 1px solid var(--border-muted); border-top: 4px solid var(--primary-navy); }
         .front-card h3 { color: var(--primary-navy); font-size: 1.1rem; margin-bottom: 0.75rem; }
         .front-card p { color: var(--text-dark); font-size: 0.9rem; }
 
-        /* --- Data Grid & Matrix System layouts --- */
         .card-grid-3 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         @media (min-width: 768px) { .card-grid-3 { grid-template-columns: repeat(3, 1fr); } }
         .card-grid-2 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
@@ -108,7 +84,6 @@
         .download-btn { display: block; text-align: center; background: var(--secondary-charcoal); color: var(--text-light); padding: 0.6rem; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-top: auto; cursor: pointer; }
         .download-btn:hover { background: var(--primary-navy); }
 
-        /* --- Specialized Media & News Vault Subsections --- */
         .vault-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem; }
         @media (min-width: 768px) { .vault-grid { grid-template-columns: repeat(2, 1fr); } }
         .vault-display { border: 1px solid var(--border-muted); border-radius: 6px; background: #FFFFFF; overflow: hidden; display: flex; flex-direction: column; }
@@ -123,7 +98,6 @@
         .preview-placeholder { width: 100%; height: 180px; background: #E2E8F0; display: flex; align-items: center; justify-content: center; color: #4A5568; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border-muted); position: relative; }
         .preview-placeholder::after { content: "🔒 SECURE HOSTED LINK"; font-size: 0.65rem; background: var(--accent-warning); color: #FFF; padding: 0.2rem 0.5rem; border-radius: 3px; position: absolute; top: 10px; right: 10px; letter-spacing: 0.5px; text-transform: uppercase; }
 
-        /* --- Stakeholder Matrix --- */
         .matrix-section { margin-bottom: 3rem; }
         .matrix-section-title { font-size: 1.25rem; color: var(--primary-navy); background: var(--light-bg); padding: 1rem; border-left: 5px solid var(--primary-navy); margin-bottom: 1.5rem; font-weight: 700; }
         .stakeholder-card { background: white; padding: 1.5rem; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 1.5rem; border: 1px solid var(--border-muted); border-top: 3px solid var(--accent-warning); }
@@ -133,19 +107,10 @@
         .transparency-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent-warning); font-weight: 600; text-decoration: none; margin-top: 0.5rem; padding: 0.5rem 1rem; background: #FEF2F2; border-radius: 4px; border: 1px solid #FECACA; transition: all 0.3s; font-size: 0.85rem; }
         .transparency-link:hover { background: var(--accent-warning); color: white; }
 
-        .matrix-container { width: 100%; overflow-x: auto; border: 1px solid var(--border-muted); border-radius: 6px; margin-top: 1rem; }
-        .matrix-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem; }
-        .matrix-table th { background-color: var(--primary-navy); color: var(--text-light); padding: 0.85rem; font-weight: 600; }
-        .matrix-table td { padding: 1rem 0.85rem; border-bottom: 1px solid var(--border-muted); vertical-align: top; color: var(--text-dark); }
-        .matrix-table tr:nth-child(even) { background-color: var(--light-bg); }
-        .badge { display: inline-block; padding: 0.2rem 0.4rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; background: #FEE2E2; color: #991B1B; }
-
-        /* --- Template Preview Box --- */
         .template-preview { background: var(--light-bg); padding: 2rem; border-radius: 6px; margin-top: 3rem; border-left: 5px solid var(--primary-navy); }
         .template-preview h3 { color: var(--primary-navy); margin-bottom: 1rem; }
         .template-preview pre { background: white; padding: 1.5rem; border-radius: 4px; font-size: 0.8rem; line-height: 1.5; overflow-x: auto; border: 1px solid var(--border-muted); color: var(--text-dark); }
 
-        /* --- About Page Specific --- */
         .objectives-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1.5rem; }
         @media (min-width: 768px) { .objectives-grid { grid-template-columns: repeat(3, 1fr); } }
         .objective-card { background: white; padding: 1.5rem; border-radius: 6px; border: 1px solid var(--border-muted); border-top: 4px solid var(--primary-navy); }
@@ -156,11 +121,9 @@
         .disclaimer-box p { color: var(--text-dark); font-size: 0.9rem; }
         .campaign-quote { font-style: italic; font-size: 1.2rem; color: var(--secondary-charcoal); border-left: 4px solid var(--accent-warning); padding-left: 1.5rem; margin: 3rem auto; max-width: 800px; line-height: 1.6; }
 
-        /* --- Quote Callout Box --- */
         .inspirational-quote-box { background-color: var(--primary-navy); color: var(--text-light); padding: 2.5rem; border-radius: 6px; text-align: center; margin: 3rem 0; border-right: 6px solid var(--accent-warning); }
         .inspirational-quote-box blockquote { font-size: 1.25rem; font-style: italic; line-height: 1.5; color: var(--text-light); }
 
-        /* --- Media Dossier Section --- */
         .media-section { background: var(--primary-navy); color: var(--text-light); border-radius: 6px; padding: 3rem 2rem; text-align: center; margin-top: 2rem; }
         .media-section h2 { color: var(--text-light); font-size: 1.6rem; margin-bottom: 1.5rem; border: none; padding: 0; }
         .media-section p { color: var(--text-light); max-width: 800px; margin: 0 auto 2rem; }
@@ -169,7 +132,6 @@
         .media-section .btn-primary { background: white; color: var(--primary-navy); }
         .media-section .btn-primary:hover { background: #FEE2E2; }
 
-        /* --- Contact Cards --- */
         .contact-card { background: white; padding: 2rem; border-radius: 6px; border: 1px solid var(--border-muted); border-top: 4px solid var(--primary-navy); }
         .contact-card h3 { color: var(--primary-navy); font-size: 1.25rem; margin-bottom: 1rem; }
         .contact-card p { font-size: 0.9rem; color: var(--text-dark); margin-bottom: 1rem; }
@@ -180,27 +142,22 @@
         .whatsapp-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: #25D366; color: white; padding: 0.8rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 600; margin-top: 1rem; transition: transform 0.2s, background 0.3s; }
         .whatsapp-btn:hover { transform: translateY(-2px); background: #20ba5a; }
 
-        /* --- Legal Intake Form --- */
         .legal-intake-section { background: var(--light-bg); padding: 3rem; border-radius: 8px; margin-top: 3rem; border-left: 5px solid var(--primary-navy); }
         .intake-form { background: white; padding: 2rem; border-radius: 6px; margin-top: 2rem; border: 1px solid var(--border-muted); }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-label { display: block; margin-bottom: 0.4rem; font-size: 0.9rem; font-weight: 600; color: var(--secondary-charcoal); }
+        .form-control { width: 100%; padding: 0.75rem; border: 1px solid #CBD5E0; border-radius: 4px; font-family: var(--font-stack); font-size: 0.95rem; color: var(--text-dark); }
+        .form-control:focus { outline: 2px solid var(--primary-navy); outline-offset: 1px; }
+        textarea.form-control { min-height: 100px; resize: vertical; }
         .checkbox-group { margin-top: 0.5rem; }
         .checkbox-group label { display: flex; align-items: flex-start; gap: 0.5rem; font-weight: normal; font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--text-dark); }
         .checkbox-group input[type="checkbox"], .checkbox-group input[type="radio"] { margin-top: 0.2rem; }
         .security-notice { background: rgba(211, 47, 47, 0.1); border-left: 4px solid var(--accent-warning); padding: 1.5rem; margin: 2rem 0; border-radius: 0 6px 6px 0; }
         .security-notice h3 { color: var(--accent-warning); margin-bottom: 0.5rem; font-size: 1.1rem; }
         .security-notice p { font-size: 0.9rem; margin-bottom: 0; color: var(--text-dark); }
-
-        /* --- Form Infrastructure Controls --- */
-        .contact-form-panel { background: var(--light-bg); border: 1px solid var(--border-muted); padding: 2.5rem; border-radius: 8px; max-width: 700px; margin: 0 auto; }
-        .form-group { margin-bottom: 1.25rem; }
-        .form-label { display: block; margin-bottom: 0.4rem; font-size: 0.9rem; font-weight: 600; color: var(--secondary-charcoal); }
-        .form-control { width: 100%; padding: 0.75rem; border: 1px solid #CBD5E0; border-radius: 4px; font-family: var(--font-stack); font-size: 0.95rem; color: var(--text-dark); }
-        .form-control:focus { outline: 2px solid var(--primary-navy); outline-offset: 1px; }
-        textarea.form-control { min-height: 100px; resize: vertical; }
         .submit-action-btn { background: var(--primary-navy); color: var(--text-light); border: none; padding: 0.85rem 2rem; font-size: 0.95rem; font-weight: 600; border-radius: 4px; cursor: pointer; transition: background 0.2s ease; }
         .submit-action-btn:hover { background: var(--secondary-charcoal); }
 
-        /* --- Central Shared Global Footer --- */
         .global-footer { background-color: #111827; color: #E5E7EB; padding: 3rem 2rem 1.5rem 2rem; border-top: 4px solid var(--secondary-charcoal); font-size: 0.85rem; margin-top: 5rem; }
         .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
         @media (min-width: 992px) { .footer-container { grid-template-columns: 1.5fr 1fr 1.5fr; } }
@@ -221,15 +178,12 @@
         .security-warning { background: rgba(239, 68, 68, 0.15); border-left: 3px solid #EF4444; padding: 0.8rem; margin: 1rem 0; font-size: 0.75rem; color: #FCA5A5; }
         .footer-bottom { max-width: 1200px; margin: 2.5rem auto 0 auto; padding-top: 1.25rem; border-top: 1px solid #374151; text-align: center; font-size: 0.8rem; font-style: italic; color: #E5E7EB; }
 
-        /* --- Dynamic Live Tracker Callout Box --- */
         .ticker-panel { background: var(--primary-navy); color: #FEE2E2; padding: 0.75rem 1rem; text-align: center; font-size: 0.9rem; font-style: italic; border-bottom: 2px solid var(--accent-warning); }
         #global-ticker-text { transition: opacity 0.3s ease; }
 
-        /* --- WhatsApp Floating Icon --- */
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.3); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; }
         .whatsapp-float:hover { transform: scale(1.1); }
 
-        /* --- Multimedia Gallery Styles --- */
         .media-gallery-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem; }
         @media (min-width: 768px) { .media-gallery-grid { grid-template-columns: repeat(2, 1fr); } }
         .media-card-featured { background: white; border: 1px solid var(--border-muted); border-radius: 8px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
@@ -244,7 +198,6 @@
         .media-card-content p { color: var(--text-dark); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.6; }
         .media-meta { display: flex; gap: 1.5rem; font-size: 0.8rem; color: #718096; margin-bottom: 1rem; flex-wrap: wrap; }
 
-        /* Image Gallery */
         .image-gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
         .image-card { background: white; border: 1px solid var(--border-muted); border-radius: 6px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
         .image-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
@@ -255,7 +208,6 @@
         .image-card-content h4 { color: var(--primary-navy); font-size: 1rem; margin-bottom: 0.5rem; }
         .image-card-content p { color: var(--text-dark); font-size: 0.85rem; margin-bottom: 1rem; line-height: 1.5; }
 
-        /* Audio Gallery */
         .audio-gallery-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; }
         @media (min-width: 768px) { .audio-gallery-grid { grid-template-columns: repeat(2, 1fr); } }
         .audio-card { background: white; border: 1px solid var(--border-muted); border-radius: 6px; overflow: hidden; }
@@ -280,7 +232,6 @@
         .audio-card-content h4 { color: var(--primary-navy); font-size: 1.05rem; margin-bottom: 0.75rem; }
         .audio-card-content p { color: var(--text-dark); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.6; }
 
-        /* --- Mobile Responsive --- */
         @media (max-width: 768px) {
             .header-container { flex-direction: column; text-align: center; }
             .nav-menu { gap: 0.5rem; justify-content: center; font-size: 0.8rem; }
@@ -296,12 +247,10 @@
 </head>
 <body>
 
-    <!-- ==================== DYNAMIC LIVE TICKER ENGINE ==================== -->
     <div class="ticker-panel">
-        <span id="global-ticker-text">🔴 LIVE: Form WG.29 (Section 91 Objection) lodged against RMA • HPCSA ethical complaint against Dr. Ramushu under review • Public Protector case CMS 93110/2026 filed • RAF statutory deadline expired • 47 documents archived • 12+ years of documented delay</span>
+        <span id="global-ticker-text">🔴 LIVE: Form WG.29 (Section 91 Objection) lodged against RMA • HPCSA ethical complaint against Dr. Ramushu under review • Public Protector case CMS 93110/2026 filed • RAF statutory deadline expired • 48 documents archived • 12+ years of documented delay</span>
     </div>
 
-    <!-- ==================== GLOBAL PLATFORM HEADER ==================== -->
     <header class="global-header">
         <div class="header-container">
             <a href="#" onclick="navigateTo('home'); return false;" class="brand-identity">⚖️ Accountability Archive</a>
@@ -318,9 +267,7 @@
         </div>
     </header>
 
-    <!-- ========================================================= -->
     <!-- ==================== PAGE VIEW: HOME ==================== -->
-    <!-- ========================================================= -->
     <div id="view-home" class="page-view active-view">
 
         <section class="hero-section">
@@ -350,6 +297,11 @@
                         <span class="track-status pending">⏳ Pending Response</span>
                     </div>
                     <div class="track-card">
+                        <h4>Compensation Fund <span class="track-id">WCL22</span></h4>
+                        <small style="color: var(--secondary-charcoal);">Application for Compensation — Spine TB (Tuberculous Spondylitis)</small>
+                        <span class="track-status expired">⚠️ Unprocessed — Statutory Deadline Breached</span>
+                    </div>
+                    <div class="track-card">
                         <h4>HPCSA <span class="track-id">ETH-001</span></h4>
                         <small style="color: var(--secondary-charcoal);">Ethical Complaint — Dr. Ramushu</small>
                         <span class="track-status pending">⏳ Under Review</span>
@@ -367,7 +319,7 @@
                     <div class="counter-grid">
                         <div class="counter-box"><span class="counter-number">4</span><span class="counter-label">Active Fronts</span></div>
                         <div class="counter-box"><span class="counter-number">12+</span><span class="counter-label">Years of Delay</span></div>
-                        <div class="counter-box"><span class="counter-number">47</span><span class="counter-label">Documents Logged</span></div>
+                        <div class="counter-box"><span class="counter-number">48</span><span class="counter-label">Documents Logged</span></div>
                         <div class="counter-box"><span class="counter-number">3</span><span class="counter-label">Institutions Challenged</span></div>
                     </div>
                 </div>
@@ -377,7 +329,7 @@
             <div class="fronts-grid">
                 <div class="front-card">
                     <h3>🏛️ The COIDA / RMA Front</h3>
-                    <p><strong>(Occupational Injury Disablement):</strong> This claim involves the deliberate exclusion of documented psychiatric trauma from formal compensation assessments. Despite comprehensive medical evidence establishing severe post-traumatic stress and spinal injury, administrative bodies have actively manipulated the claim profile. This site hosts the formal paperwork, including the Section 91 Objection (Form WG.29) lodged to legally compel the statutory administrators to recognize the full clinical reality of the case.</p>
+                    <p><strong>(Occupational Injury Disablement):</strong> This claim involves the deliberate exclusion of documented psychiatric trauma from formal compensation assessments. Despite comprehensive medical evidence establishing severe post-traumatic stress and spinal injury, administrative bodies have actively manipulated the claim profile. This site hosts the formal paperwork, including the Section 91 Objection (Form WG.29) and the original Application for Compensation (Form WCL22) for spine TB (tuberculous spondylitis) lodged to legally compel the statutory administrators to recognize the full clinical reality of the case. Despite the WCL22 being filed within the prescribed 12-month statutory window, the Compensation Fund has failed to process the claim to finality.</p>
                 </div>
                 <div class="front-card">
                     <h3>🚗 The Road Accident Fund (RAF) Front</h3>
@@ -389,7 +341,6 @@
                 </div>
             </div>
 
-            <!-- EVIDENCE VAULT -->
             <h2 class="section-heading" id="vault">The Evidence Vault</h2>
             <p class="section-intro"><em>All highly sensitive personal data (ID numbers, home addresses) have been rigorously redacted in compliance with POPIA. Documents are hosted on secure, access-controlled infrastructure.</em></p>
 
@@ -411,9 +362,10 @@
                     <div class="preview-placeholder">📁 Module 02 — Statutory Forms</div>
                     <div class="vault-display-header">
                         <span>⚖️ Statutory Discrepancies & Disputed Forms</span>
-                        <span class="badge">3 Files</span>
+                        <span class="badge">4 Files</span>
                     </div>
                     <ul class="vault-item-list">
+                        <li class="vault-item"><a href="#" target="_blank">Form WCL22 (Application for Compensation — Spine TB)</a><span class="vault-meta">PDF • 980KB</span></li>
                         <li class="vault-item"><a href="#" target="_blank">Form WG.29 (Section 91 Objection Submission)</a><span class="vault-meta">PDF • 1.2MB</span></li>
                         <li class="vault-item"><a href="#" target="_blank">Form W.Cl.303 (First Medical Report — PTSD)</a><span class="vault-meta">PDF • 2.7MB</span></li>
                         <li class="vault-item"><a href="#" target="_blank">HPCSA Ethical Infraction Dossier (Dr Ramushu)</a><span class="vault-meta">PDF • 5.3MB</span></li>
@@ -467,9 +419,7 @@
         </div>
     </div>
 
-    <!-- ========================================================== -->
     <!-- ==================== PAGE VIEW: ABOUT ==================== -->
-    <!-- ========================================================== -->
     <div id="view-about" class="page-view">
         <section class="hero-section">
             <div class="hero-container">
@@ -527,9 +477,7 @@
         </div>
     </div>
 
-    <!-- ============================================================= -->
     <!-- ==================== PAGE VIEW: SERVICES ==================== -->
-    <!-- ============================================================= -->
     <div id="view-services" class="page-view">
         <section class="hero-section">
             <div class="hero-container">
@@ -551,6 +499,22 @@
                         <li>Escalation pathway if objection is ignored beyond 30 days</li>
                     </ul>
                     <a href="#" class="download-btn">📥 Download WG.29 Template [PDF]</a>
+                </div>
+
+                <div class="tool-card">
+                    <h3>📝 Form WCL22: Application for Compensation — Spine TB</h3>
+                    <p>A complete procedural guide for completing and lodging Form WCL22 (Application for Compensation) under COIDA for spine TB (tuberculous spondylitis). This is the foundational document that triggers the Compensation Fund's statutory obligation to assess and pay benefits for occupational diseases.</p>
+                    <ul>
+                        <li>Eligibility criteria: Spine TB as occupational disease under COIDA</li>
+                        <li>12-month statutory filing window: Calculating your deadline from diagnosis date</li>
+                        <li>Required supporting documents: W.Cl.2, W.Cl.4, W.Cl.5, TB diagnosis, spinal imaging</li>
+                        <li>Step-by-step WCL22 form completion with annotated examples for spine TB</li>
+                        <li>Submission protocols: Compensation Fund office, RMA, or online via CompEasy</li>
+                        <li>What happens after filing: Statutory processing timelines (90 days)</li>
+                        <li>Escalation pathway: Section 91 Objection (Form WG.29) if WCL22 is ignored</li>
+                        <li>Common rejection tactics for TB claims and how to counter them</li>
+                    </ul>
+                    <a href="#" class="download-btn">📥 Download WCL22 Spine TB Guide [PDF]</a>
                 </div>
 
                 <div class="tool-card">
@@ -671,9 +635,7 @@ CONTACT: ___________________________</pre>
         </div>
     </div>
 
-    <!-- ============================================================= -->
     <!-- ==================== PAGE VIEW: PROJECTS ==================== -->
-    <!-- ============================================================= -->
     <div id="view-projects" class="page-view">
         <section class="hero-section">
             <div class="hero-container">
@@ -684,14 +646,11 @@ CONTACT: ___________________________</pre>
 
         <div class="main-container">
 
-            <!-- ==================== MULTIMEDIA EVIDENCE GALLERY ==================== -->
             <h2 class="section-heading" id="multimedia-gallery">🎬 Multimedia Evidence Gallery</h2>
             <p class="section-intro">Broadcast-ready video briefings, anonymized clinical imaging, and documented audio records. All media is timestamped, verified, and hosted on secure infrastructure.</p>
 
-            <!-- VIDEO SECTION -->
             <h3 style="color: var(--primary-navy); font-size: 1.3rem; margin: 2rem 0 1rem; border-left: 5px solid var(--accent-warning); padding-left: 0.75rem;">📹 Video Evidence Library</h3>
             <div class="media-gallery-grid">
-                
                 <div class="media-card-featured">
                     <div class="video-container">
                         <div class="video-placeholder">
@@ -767,13 +726,10 @@ CONTACT: ___________________________</pre>
                         <a href="#" class="download-btn">▶ Watch Full Video</a>
                     </div>
                 </div>
-
             </div>
 
-            <!-- IMAGE GALLERY SECTION -->
             <h3 style="color: var(--primary-navy); font-size: 1.3rem; margin: 3rem 0 1rem; border-left: 5px solid var(--accent-warning); padding-left: 0.75rem;">🖼️ Clinical Imaging & Document Archive</h3>
             <div class="image-gallery-grid">
-                
                 <div class="image-card">
                     <div class="image-placeholder">
                         <span class="image-icon">🩻</span>
@@ -869,28 +825,16 @@ CONTACT: ___________________________</pre>
                         <a href="#" class="download-btn">🔍 View Full Resolution</a>
                     </div>
                 </div>
-
             </div>
 
-            <!-- AUDIO SECTION -->
             <h3 style="color: var(--primary-navy); font-size: 1.3rem; margin: 3rem 0 1rem; border-left: 5px solid var(--accent-warning); padding-left: 0.75rem;">🎙️ Audio Records & Administrative Logs</h3>
             <div class="audio-gallery-grid">
-                
                 <div class="audio-card">
                     <div class="audio-player-mock">
                         <div class="audio-controls">
                             <span class="play-button">▶</span>
                             <div class="audio-waveform">
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div>
                             </div>
                             <span class="audio-duration">04:32</span>
                         </div>
@@ -911,16 +855,7 @@ CONTACT: ___________________________</pre>
                         <div class="audio-controls">
                             <span class="play-button">▶</span>
                             <div class="audio-waveform">
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div>
                             </div>
                             <span class="audio-duration">06:15</span>
                         </div>
@@ -941,16 +876,7 @@ CONTACT: ___________________________</pre>
                         <div class="audio-controls">
                             <span class="play-button">▶</span>
                             <div class="audio-waveform">
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div>
                             </div>
                             <span class="audio-duration">09:48</span>
                         </div>
@@ -971,16 +897,7 @@ CONTACT: ___________________________</pre>
                         <div class="audio-controls">
                             <span class="play-button">▶</span>
                             <div class="audio-waveform">
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
-                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div>
                             </div>
                             <span class="audio-duration">11:22</span>
                         </div>
@@ -995,10 +912,7 @@ CONTACT: ___________________________</pre>
                         <a href="#" class="download-btn">🎧 Listen to Recording</a>
                     </div>
                 </div>
-
             </div>
-
-            <!-- ==================== END MULTIMEDIA GALLERY ==================== -->
 
             <h2 class="section-heading">🎥 Media & News Vault</h2>
             <p class="section-intro">A live digital newsroom hosting public education content, distributing newsletters, and providing journalists with immediate broadcast-ready raw materials.</p>
@@ -1082,7 +996,7 @@ CONTACT: ___________________________</pre>
                 <div class="stakeholder-card">
                     <h3>1. Workplace Trade Unions (e.g., NUM / AMCU)</h3>
                     <p><strong>Enforcement Mandate:</strong> Constitutional Obligation to Support, Represent, and Protect Injured and Vulnerable Members (Labour Relations Act).</p>
-                    <p><strong>Active Infraction Log:</strong> Total abandonment of a critically injured and traumatized worker during an unfair corporate dismissal process, and failing to compel the employer to file statutory injury documentation such as Form W.Cl.2 or Form W.Cl.22.</p>
+                    <p><strong>Active Infraction Log:</strong> Total abandonment of a critically injured and traumatized worker during an unfair corporate dismissal process. Failed to compel the employer to file statutory injury documentation such as Form W.Cl.2 (Employer's Report of an Accident) or Form WCL22 (Application for Compensation) for spine TB. Failed to assist the injured member in lodging the WCL22 claim within the prescribed 12-month statutory window, despite being constitutionally obligated to represent and protect vulnerable members under the Labour Relations Act.</p>
                     <a href="#" class="transparency-link">📂 View Union Correspondence & Representation Failures</a>
                 </div>
             </div>
@@ -1130,16 +1044,14 @@ CONTACT: ___________________________</pre>
                 <div class="stakeholder-card">
                     <h3>2. The Employer (Valterra / Former Anglo Platinum Operations)</h3>
                     <p><strong>Enforcement Mandate:</strong> Corporate Liability & Duty of Care for Workplace Occupational Health Hazards.</p>
-                    <p><strong>Active Infraction Log:</strong> Weaponizing an unfair dismissal to evade long-term statutory pension and medical liabilities. Demanding specialized doctor-signed forms while knowingly recording that only a clinic male nurse was on duty during the primary injury report.</p>
+                    <p><strong>Active Infraction Log:</strong> Weaponizing an unfair dismissal to evade long-term statutory pension and medical liabilities. Demanding specialized doctor-signed forms while knowingly recording that only a clinic male nurse was on duty during the primary injury report. Failed to assist the injured employee in completing and submitting Form WCL22 (Application for Compensation) for spine TB within the statutory 12-month window, and failed to file the mandatory Form W.Cl.2 (Employer's Report of an Accident) timeously, directly contributing to the Compensation Fund's administrative delays.</p>
                     <a href="#" class="transparency-link">📂 View Employer Liability & Dismissal Timeline</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================================= -->
     <!-- ==================== PAGE VIEW: CONTACTS ==================== -->
-    <!-- ============================================================= -->
     <div id="view-contacts" class="page-view">
         <section class="hero-section">
             <div class="hero-container">
@@ -1319,10 +1231,8 @@ CONTACT: ___________________________</pre>
         </div>
     </footer>
 
-    <!-- ==================== WHATSAPP FLOATING ICON ==================== -->
     <a href="https://wa.me/27123456789?text=Hello,%20I%20am%20contacting%20you%20regarding%20the%20accountability%20campaign." class="whatsapp-float" target="_blank" title="Contact via WhatsApp">💬</a>
 
-    <!-- ==================== DYNAMIC VIEW ENGINE SCRIPT ==================== -->
     <script>
         function navigateTo(viewName) {
             document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active-view'));
@@ -1334,12 +1244,12 @@ CONTACT: ___________________________</pre>
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Dynamic ticker rotation
         const tickerMessages = [
             "🔴 LIVE: Form WG.29 (Section 91 Objection) lodged against RMA • HPCSA ethical complaint against Dr. Ramushu under review",
-            "🔴 LIVE: Public Protector case CMS 93110/2026 filed • RAF statutory deadline expired • 47 documents archived",
+            "🔴 LIVE: Form WCL22 (Application for Compensation) for spine TB filed but unprocessed by Compensation Fund • Statutory deadline breached",
+            "🔴 LIVE: Public Protector case CMS 93110/2026 filed • RAF statutory deadline expired • 48 documents archived",
             "🔴 LIVE: 12+ years of documented delay • 3 institutions challenged • 4 active legal fronts in progress",
-            "🔴 LIVE: Employer Valterra / Anglo Platinum dismissal timeline published • Electronic claim swapping evidence logged",
+            "🔴 LIVE: Employer Valterra / Anglo Platinum failed to assist with WCL22 filing for spine TB • Electronic claim swapping evidence logged",
             "🔴 LIVE: Multimedia Evidence Gallery updated — 4 videos, 8 images, 4 audio recordings now available"
         ];
         let tickerIndex = 0;
@@ -1357,4 +1267,4 @@ CONTACT: ___________________________</pre>
     </script>
 
 </body>
-</html>i
+</html>
