@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statutory Accountability & Medical Justice Master Platform</title>
+    <meta name="description" content="An open-source, launch-ready multi-page architecture tracking administrative non-performance, file-swapping, and corporate liability across the RAF, COIDA, and RMA.">
+    <style>
+        /* --- Core Systemic Root Tokens --- */
+        :root {
+            --primary-navy: #1B2A4A;
+            --secondary-charcoal: #2C3E50;
+            --accent-warning: #D32F2F;
+            --light-bg: #F8F9FA;
+            --border-muted: #E2E8F0;
+            --text-dark: #1A202C;
+            --text-light: #FFFFFF;
+            --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-stack); line-height: 1.6; color: var(--text-dark); background-color: #FFFFFF; }
+
+        /* --- Global Structural Navigation Header --- */
+        .global-header {
+            background-color: var(--primary-navy);
+            border-bottom: 3px solid var(--accent-warning);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .header-container {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem;
+            flex-wrap: wrap; gap: 1rem;
+        }
+        .brand-identity {
+            color: var(--text-light); font-size: 1.1rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none;
+        }
+        .nav-menu { display: flex; list-style: none; gap: 1rem; align-items: center; flex-wrap: wrap; }
+        .nav-link {
+            color: #E2E8F0; text-decoration: none; font-weight: 500; font-size: 0.9rem;
+            padding: 0.5rem 0.75rem; border-radius: 4px; cursor: pointer; transition: all 0.2s ease;
+        }
+        .nav-link:hover, .nav-link.active { background-color: var(--secondary-charcoal); color: var(--text-light); }
+        .cta-vault-btn {
+            background-color: var(--accent-warning); color: var(--text-light);
+            padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: 600; text-decoration: none; font-size: 0.85rem;
+        }
+        .cta-vault-btn:hover { background-color: #B71C1C; }
+
+        /* --- Dynamic View Engine Architecture --- */
+        .page-view { display: none; padding: 0; }
+        .page-view.active-view { display: block; }
+
+        /* --- UI Utility Layout Classes --- */
+        .hero-section { background-color: var(--light-bg); padding: 4rem 2rem; border-bottom: 1px solid var(--border-muted); text-align: center; }
+        .hero-container { max-width: 850px; margin: 0 auto; }
+        .hero-section h1 { color: var(--primary-navy); font-size: 2.2rem; margin-bottom: 1rem; line-height: 1.2; }
+        .hero-section p { font-size: 1.1rem; color: var(--secondary-charcoal); margin-bottom: 1.5rem; }
+        .hero-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .btn-primary { background-color: var(--primary-navy); color: var(--text-light); padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 600; transition: background-color 0.2s ease; display: inline-block; cursor: pointer; border: none; }
+        .btn-primary:hover { background-color: var(--secondary-charcoal); }
+        .btn-secondary { background-color: transparent; color: var(--primary-navy); border: 2px solid var(--primary-navy); padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 600; transition: all 0.2s ease; display: inline-block; cursor: pointer; }
+        .btn-secondary:hover { background-color: var(--primary-navy); color: var(--text-light); }
+        
+        .main-container { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+        .grid-two-col { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+        @media (min-width: 992px) { .grid-two-col { grid-template-columns: 1.7fr 1.3fr; } }
+        
+        .content-block { margin-bottom: 2.5rem; }
+        .content-block h2, .section-heading { color: var(--primary-navy); font-size: 1.6rem; margin-bottom: 1rem; border-left: 5px solid var(--accent-warning); padding-left: 0.75rem; }
+        .content-block p, .section-intro { margin-bottom: 1rem; text-align: justify; color: var(--text-dark); }
+        .section-intro { font-size: 1.05rem; max-width: 900px; }
+
+        /* --- Dashboard Status Panels --- */
+        .dashboard-panel { background-color: var(--light-bg); border: 1px solid var(--border-muted); border-radius: 6px; padding: 1.5rem; height: fit-content; }
+        .dashboard-panel h3 { color: var(--primary-navy); margin-bottom: 1rem; font-size: 1.15rem; text-transform: uppercase; border-bottom: 2px solid var(--border-muted); padding-bottom: 0.5rem; }
+        .track-card { background: #FFFFFF; border: 1px solid var(--border-muted); border-radius: 4px; padding: 1rem; margin-bottom: 0.75rem; border-left: 4px solid var(--accent-warning); }
+        .track-card h4 { font-size: 0.9rem; color: var(--secondary-charcoal); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+        .track-id { font-family: monospace; background: #EDF2F7; padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.8rem; color: var(--text-dark); }
+        .track-status { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-top: 0.4rem; display: inline-block; padding: 0.2rem 0.5rem; border-radius: 3px; }
+        .track-status.pending { color: #92400E; background: #FEF3C7; }
+        .track-status.expired { color: #991B1B; background: #FEE2E2; }
+
+        .counter-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem; }
+        .counter-box { background: var(--primary-navy); color: var(--text-light); padding: 1.25rem; border-radius: 6px; text-align: center; }
+        .counter-number { font-size: 1.75rem; font-weight: 700; display: block; color: #FEE2E2; }
+        .counter-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: #E2E8F0; }
+
+        /* --- Fronts Grid --- */
+        .fronts-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
+        @media (min-width: 768px) { .fronts-grid { grid-template-columns: repeat(3, 1fr); } }
+        .front-card { background: white; padding: 1.5rem; border-radius: 6px; border: 1px solid var(--border-muted); border-top: 4px solid var(--primary-navy); }
+        .front-card h3 { color: var(--primary-navy); font-size: 1.1rem; margin-bottom: 0.75rem; }
+        .front-card p { color: var(--text-dark); font-size: 0.9rem; }
+
+        /* --- Data Grid & Matrix System layouts --- */
+        .card-grid-3 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        @media (min-width: 768px) { .card-grid-3 { grid-template-columns: repeat(3, 1fr); } }
+        .card-grid-2 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        @media (min-width: 768px) { .card-grid-2 { grid-template-columns: repeat(2, 1fr); } }
+        .tool-card { border: 1px solid var(--border-muted); border-radius: 6px; padding: 1.5rem; background: #FFFFFF; display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--primary-navy); }
+        .tool-card h3 { color: var(--primary-navy); font-size: 1.15rem; margin-bottom: 0.75rem; }
+        .tool-card p { font-size: 0.9rem; color: var(--text-dark); margin-bottom: 1rem; text-align: justify; }
+        .tool-card ul { list-style: none; margin-bottom: 1rem; }
+        .tool-card li { padding: 0.3rem 0; padding-left: 1.2rem; position: relative; color: var(--text-dark); font-size: 0.85rem; }
+        .tool-card li::before { content: "✓"; position: absolute; left: 0; color: var(--accent-warning); font-weight: bold; }
+        .download-btn { display: block; text-align: center; background: var(--secondary-charcoal); color: var(--text-light); padding: 0.6rem; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-top: auto; cursor: pointer; }
+        .download-btn:hover { background: var(--primary-navy); }
+
+        /* --- Specialized Media & News Vault Subsections --- */
+        .vault-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem; }
+        @media (min-width: 768px) { .vault-grid { grid-template-columns: repeat(2, 1fr); } }
+        .vault-display { border: 1px solid var(--border-muted); border-radius: 6px; background: #FFFFFF; overflow: hidden; display: flex; flex-direction: column; }
+        .vault-display-header { background: var(--secondary-charcoal); color: var(--text-light); padding: 1rem; font-weight: 600; font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; }
+        .vault-item-list { list-style: none; padding: 0; margin: 0; }
+        .vault-item { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border-muted); display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; gap: 1rem; flex-wrap: wrap; }
+        .vault-item:last-child { border-bottom: none; }
+        .vault-item:hover { background: var(--light-bg); }
+        .vault-item a { color: var(--primary-navy); text-decoration: none; font-weight: 500; flex: 1; }
+        .vault-item a:hover { color: var(--accent-warning); text-decoration: underline; }
+        .vault-meta { color: #718096; font-size: 0.75rem; font-family: monospace; white-space: nowrap; }
+        .preview-placeholder { width: 100%; height: 180px; background: #E2E8F0; display: flex; align-items: center; justify-content: center; color: #4A5568; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border-muted); position: relative; }
+        .preview-placeholder::after { content: "🔒 SECURE HOSTED LINK"; font-size: 0.65rem; background: var(--accent-warning); color: #FFF; padding: 0.2rem 0.5rem; border-radius: 3px; position: absolute; top: 10px; right: 10px; letter-spacing: 0.5px; text-transform: uppercase; }
+
+        /* --- Stakeholder Matrix --- */
+        .matrix-section { margin-bottom: 3rem; }
+        .matrix-section-title { font-size: 1.25rem; color: var(--primary-navy); background: var(--light-bg); padding: 1rem; border-left: 5px solid var(--primary-navy); margin-bottom: 1.5rem; font-weight: 700; }
+        .stakeholder-card { background: white; padding: 1.5rem; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 1.5rem; border: 1px solid var(--border-muted); border-top: 3px solid var(--accent-warning); }
+        .stakeholder-card h3 { color: var(--primary-navy); font-size: 1.15rem; margin-bottom: 1rem; }
+        .stakeholder-card p { margin-bottom: 0.8rem; font-size: 0.9rem; color: var(--text-dark); }
+        .stakeholder-card strong { color: var(--secondary-charcoal); }
+        .transparency-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent-warning); font-weight: 600; text-decoration: none; margin-top: 0.5rem; padding: 0.5rem 1rem; background: #FEF2F2; border-radius: 4px; border: 1px solid #FECACA; transition: all 0.3s; font-size: 0.85rem; }
+        .transparency-link:hover { background: var(--accent-warning); color: white; }
+
+        .matrix-container { width: 100%; overflow-x: auto; border: 1px solid var(--border-muted); border-radius: 6px; margin-top: 1rem; }
+        .matrix-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem; }
+        .matrix-table th { background-color: var(--primary-navy); color: var(--text-light); padding: 0.85rem; font-weight: 600; }
+        .matrix-table td { padding: 1rem 0.85rem; border-bottom: 1px solid var(--border-muted); vertical-align: top; color: var(--text-dark); }
+        .matrix-table tr:nth-child(even) { background-color: var(--light-bg); }
+        .badge { display: inline-block; padding: 0.2rem 0.4rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; background: #FEE2E2; color: #991B1B; }
+
+        /* --- Template Preview Box --- */
+        .template-preview { background: var(--light-bg); padding: 2rem; border-radius: 6px; margin-top: 3rem; border-left: 5px solid var(--primary-navy); }
+        .template-preview h3 { color: var(--primary-navy); margin-bottom: 1rem; }
+        .template-preview pre { background: white; padding: 1.5rem; border-radius: 4px; font-size: 0.8rem; line-height: 1.5; overflow-x: auto; border: 1px solid var(--border-muted); color: var(--text-dark); }
+
+        /* --- About Page Specific --- */
+        .objectives-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+        @media (min-width: 768px) { .objectives-grid { grid-template-columns: repeat(3, 1fr); } }
+        .objective-card { background: white; padding: 1.5rem; border-radius: 6px; border: 1px solid var(--border-muted); border-top: 4px solid var(--primary-navy); }
+        .objective-card h3 { color: var(--primary-navy); font-size: 1.1rem; margin-bottom: 0.75rem; }
+        .objective-card p { font-size: 0.9rem; color: var(--text-dark); margin-bottom: 0; }
+        .disclaimer-box { background: var(--light-bg); border-left: 5px solid var(--secondary-charcoal); padding: 2rem; border-radius: 0 6px 6px 0; margin-top: 3rem; }
+        .disclaimer-box h2 { margin-top: 0; font-size: 1.3rem; color: var(--secondary-charcoal); }
+        .disclaimer-box p { color: var(--text-dark); font-size: 0.9rem; }
+        .campaign-quote { font-style: italic; font-size: 1.2rem; color: var(--secondary-charcoal); border-left: 4px solid var(--accent-warning); padding-left: 1.5rem; margin: 3rem auto; max-width: 800px; line-height: 1.6; }
+
+        /* --- Quote Callout Box --- */
+        .inspirational-quote-box { background-color: var(--primary-navy); color: var(--text-light); padding: 2.5rem; border-radius: 6px; text-align: center; margin: 3rem 0; border-right: 6px solid var(--accent-warning); }
+        .inspirational-quote-box blockquote { font-size: 1.25rem; font-style: italic; line-height: 1.5; color: var(--text-light); }
+
+        /* --- Media Dossier Section --- */
+        .media-section { background: var(--primary-navy); color: var(--text-light); border-radius: 6px; padding: 3rem 2rem; text-align: center; margin-top: 2rem; }
+        .media-section h2 { color: var(--text-light); font-size: 1.6rem; margin-bottom: 1.5rem; border: none; padding: 0; }
+        .media-section p { color: var(--text-light); max-width: 800px; margin: 0 auto 2rem; }
+        .media-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 2rem 0; list-style: none; }
+        .media-list li { background: rgba(255,255,255,0.15); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; color: var(--text-light); }
+        .media-section .btn-primary { background: white; color: var(--primary-navy); }
+        .media-section .btn-primary:hover { background: #FEE2E2; }
+
+        /* --- Contact Cards --- */
+        .contact-card { background: white; padding: 2rem; border-radius: 6px; border: 1px solid var(--border-muted); border-top: 4px solid var(--primary-navy); }
+        .contact-card h3 { color: var(--primary-navy); font-size: 1.25rem; margin-bottom: 1rem; }
+        .contact-card p { font-size: 0.9rem; color: var(--text-dark); margin-bottom: 1rem; }
+        .contact-method { display: flex; align-items: center; gap: 0.8rem; margin: 1rem 0; padding: 1rem; background: var(--light-bg); border-radius: 4px; border-left: 3px solid var(--accent-warning); }
+        .contact-method strong { color: var(--secondary-charcoal); font-size: 0.85rem; }
+        .contact-method a { color: var(--primary-navy); text-decoration: none; font-weight: 600; }
+        .contact-method a:hover { text-decoration: underline; }
+        .whatsapp-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: #25D366; color: white; padding: 0.8rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 600; margin-top: 1rem; transition: transform 0.2s, background 0.3s; }
+        .whatsapp-btn:hover { transform: translateY(-2px); background: #20ba5a; }
+
+        /* --- Legal Intake Form --- */
+        .legal-intake-section { background: var(--light-bg); padding: 3rem; border-radius: 8px; margin-top: 3rem; border-left: 5px solid var(--primary-navy); }
+        .intake-form { background: white; padding: 2rem; border-radius: 6px; margin-top: 2rem; border: 1px solid var(--border-muted); }
+        .checkbox-group { margin-top: 0.5rem; }
+        .checkbox-group label { display: flex; align-items: flex-start; gap: 0.5rem; font-weight: normal; font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--text-dark); }
+        .checkbox-group input[type="checkbox"], .checkbox-group input[type="radio"] { margin-top: 0.2rem; }
+        .security-notice { background: rgba(211, 47, 47, 0.1); border-left: 4px solid var(--accent-warning); padding: 1.5rem; margin: 2rem 0; border-radius: 0 6px 6px 0; }
+        .security-notice h3 { color: var(--accent-warning); margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .security-notice p { font-size: 0.9rem; margin-bottom: 0; color: var(--text-dark); }
+
+        /* --- Form Infrastructure Controls --- */
+        .contact-form-panel { background: var(--light-bg); border: 1px solid var(--border-muted); padding: 2.5rem; border-radius: 8px; max-width: 700px; margin: 0 auto; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-label { display: block; margin-bottom: 0.4rem; font-size: 0.9rem; font-weight: 600; color: var(--secondary-charcoal); }
+        .form-control { width: 100%; padding: 0.75rem; border: 1px solid #CBD5E0; border-radius: 4px; font-family: var(--font-stack); font-size: 0.95rem; color: var(--text-dark); }
+        .form-control:focus { outline: 2px solid var(--primary-navy); outline-offset: 1px; }
+        textarea.form-control { min-height: 100px; resize: vertical; }
+        .submit-action-btn { background: var(--primary-navy); color: var(--text-light); border: none; padding: 0.85rem 2rem; font-size: 0.95rem; font-weight: 600; border-radius: 4px; cursor: pointer; transition: background 0.2s ease; }
+        .submit-action-btn:hover { background: var(--secondary-charcoal); }
+
+        /* --- Central Shared Global Footer --- */
+        .global-footer { background-color: #111827; color: #E5E7EB; padding: 3rem 2rem 1.5rem 2rem; border-top: 4px solid var(--secondary-charcoal); font-size: 0.85rem; margin-top: 5rem; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+        @media (min-width: 992px) { .footer-container { grid-template-columns: 1.5fr 1fr 1.5fr; } }
+        .footer-column h4 { color: var(--text-light); font-size: 1rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .footer-column p { color: #E5E7EB; line-height: 1.7; }
+        .footer-nav { list-style: none; }
+        .footer-nav li { margin-bottom: 0.5rem; }
+        .footer-nav a { color: #E5E7EB; text-decoration: none; cursor: pointer; }
+        .footer-nav a:hover { color: var(--text-light); }
+        .whistleblower-card { background-color: #1F2937; border: 1px solid #374151; padding: 1.25rem; border-radius: 6px; }
+        .whistleblower-card h4 { color: #EF4444 !important; margin-bottom: 1rem; }
+        .wb-label { display: block; color: #E5E7EB; font-size: 0.8rem; margin-bottom: 0.3rem; margin-top: 0.8rem; }
+        .wb-input { width: 100%; padding: 0.5rem; background-color: #111827; border: 1px solid #4B5563; color: var(--text-light); border-radius: 4px; margin-bottom: 0.75rem; font-family: var(--font-stack); font-size: 0.85rem; }
+        .wb-input:focus { outline: 2px solid var(--accent-warning); outline-offset: 1px; }
+        textarea.wb-input { min-height: 80px; resize: vertical; margin-bottom: 0.75rem; }
+        .wb-submit-btn { width: 100%; background-color: #EF4444; color: var(--text-light); border: none; padding: 0.6rem; font-weight: 600; border-radius: 4px; cursor: pointer; margin-top: 0.5rem; }
+        .wb-submit-btn:hover { background-color: #DC2626; }
+        .security-warning { background: rgba(239, 68, 68, 0.15); border-left: 3px solid #EF4444; padding: 0.8rem; margin: 1rem 0; font-size: 0.75rem; color: #FCA5A5; }
+        .footer-bottom { max-width: 1200px; margin: 2.5rem auto 0 auto; padding-top: 1.25rem; border-top: 1px solid #374151; text-align: center; font-size: 0.8rem; font-style: italic; color: #E5E7EB; }
+
+        /* --- Dynamic Live Tracker Callout Box --- */
+        .ticker-panel { background: var(--primary-navy); color: #FEE2E2; padding: 0.75rem 1rem; text-align: center; font-size: 0.9rem; font-style: italic; border-bottom: 2px solid var(--accent-warning); }
+        #global-ticker-text { transition: opacity 0.3s ease; }
+
+        /* --- WhatsApp Floating Icon --- */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.3); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* --- Multimedia Gallery Styles --- */
+        .media-gallery-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem; }
+        @media (min-width: 768px) { .media-gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+        .media-card-featured { background: white; border: 1px solid var(--border-muted); border-radius: 8px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+        .media-card-featured:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+        .video-container { position: relative; width: 100%; padding-top: 56.25%; background: #1a202c; }
+        .video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #1B2A4A 0%, #2C3E50 100%); color: white; }
+        .play-icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.9; }
+        .video-label { font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+        .video-duration { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+        .media-card-content { padding: 1.5rem; }
+        .media-card-content h4 { color: var(--primary-navy); font-size: 1.1rem; margin-bottom: 0.75rem; }
+        .media-card-content p { color: var(--text-dark); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.6; }
+        .media-meta { display: flex; gap: 1.5rem; font-size: 0.8rem; color: #718096; margin-bottom: 1rem; flex-wrap: wrap; }
+
+        /* Image Gallery */
+        .image-gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .image-card { background: white; border: 1px solid var(--border-muted); border-radius: 6px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+        .image-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+        .image-placeholder { width: 100%; height: 200px; background: linear-gradient(135deg, #E2E8F0 0%, #CBD5E0 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+        .image-icon { font-size: 3rem; margin-bottom: 0.5rem; opacity: 0.7; }
+        .image-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #4A5568; }
+        .image-card-content { padding: 1.25rem; }
+        .image-card-content h4 { color: var(--primary-navy); font-size: 1rem; margin-bottom: 0.5rem; }
+        .image-card-content p { color: var(--text-dark); font-size: 0.85rem; margin-bottom: 1rem; line-height: 1.5; }
+
+        /* Audio Gallery */
+        .audio-gallery-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+        @media (min-width: 768px) { .audio-gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+        .audio-card { background: white; border: 1px solid var(--border-muted); border-radius: 6px; overflow: hidden; }
+        .audio-player-mock { background: var(--light-bg); padding: 1.5rem; border-bottom: 1px solid var(--border-muted); }
+        .audio-controls { display: flex; align-items: center; gap: 1rem; }
+        .play-button { width: 40px; height: 40px; background: var(--primary-navy); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer; transition: background 0.3s; flex-shrink: 0; }
+        .play-button:hover { background: var(--secondary-charcoal); }
+        .audio-waveform { flex: 1; display: flex; align-items: center; gap: 3px; height: 40px; }
+        .waveform-bar { flex: 1; background: var(--primary-navy); border-radius: 2px; opacity: 0.6; }
+        .waveform-bar:nth-child(1) { height: 40%; }
+        .waveform-bar:nth-child(2) { height: 70%; }
+        .waveform-bar:nth-child(3) { height: 50%; }
+        .waveform-bar:nth-child(4) { height: 90%; }
+        .waveform-bar:nth-child(5) { height: 60%; }
+        .waveform-bar:nth-child(6) { height: 80%; }
+        .waveform-bar:nth-child(7) { height: 45%; }
+        .waveform-bar:nth-child(8) { height: 75%; }
+        .waveform-bar:nth-child(9) { height: 55%; }
+        .waveform-bar:nth-child(10) { height: 65%; }
+        .audio-duration { font-size: 0.85rem; font-weight: 600; color: var(--secondary-charcoal); font-family: monospace; }
+        .audio-card-content { padding: 1.5rem; }
+        .audio-card-content h4 { color: var(--primary-navy); font-size: 1.05rem; margin-bottom: 0.75rem; }
+        .audio-card-content p { color: var(--text-dark); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.6; }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; text-align: center; }
+            .nav-menu { gap: 0.5rem; justify-content: center; font-size: 0.8rem; }
+            .hero-section h1 { font-size: 1.7rem; }
+            .hero-section p { font-size: 1rem; }
+            .section-heading, .content-block h2 { font-size: 1.3rem; }
+            .inspirational-quote-box blockquote { font-size: 1rem; }
+            .legal-intake-section { padding: 1.5rem; }
+            .intake-form { padding: 1.25rem; }
+            .image-gallery-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== DYNAMIC LIVE TICKER ENGINE ==================== -->
+    <div class="ticker-panel">
+        <span id="global-ticker-text">🔴 LIVE: Form WG.29 (Section 91 Objection) lodged against RMA • HPCSA ethical complaint against Dr. Ramushu under review • Public Protector case CMS 93110/2026 filed • RAF statutory deadline expired • 47 documents archived • 12+ years of documented delay</span>
+    </div>
+
+    <!-- ==================== GLOBAL PLATFORM HEADER ==================== -->
+    <header class="global-header">
+        <div class="header-container">
+            <a href="#" onclick="navigateTo('home'); return false;" class="brand-identity">⚖️ Accountability Archive</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a id="link-home" onclick="navigateTo('home')" class="nav-link active">Home</a></li>
+                    <li><a id="link-about" onclick="navigateTo('about')" class="nav-link">About</a></li>
+                    <li><a id="link-services" onclick="navigateTo('services')" class="nav-link">Services</a></li>
+                    <li><a id="link-projects" onclick="navigateTo('projects')" class="nav-link">Projects</a></li>
+                    <li><a id="link-contacts" onclick="navigateTo('contacts')" class="nav-link">Contacts</a></li>
+                    <li><a onclick="navigateTo('home'); setTimeout(()=>document.getElementById('vault').scrollIntoView({behavior:'smooth'}), 100);" class="cta-vault-btn">📥 Evidence Vault</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========================================================= -->
+    <!-- ==================== PAGE VIEW: HOME ==================== -->
+    <!-- ========================================================= -->
+    <div id="view-home" class="page-view active-view">
+
+        <section class="hero-section">
+            <div class="hero-container">
+                <h1>Fighting For Accountable Justice: The Case of Elias</h1>
+                <p>Tracking a multi-year battle for lawful injury compensation against systemic institutional stagnation, corporate medical manipulation, and administrative bad faith.</p>
+                <div class="hero-buttons">
+                    <a onclick="document.getElementById('vault').scrollIntoView({behavior:'smooth'})" class="btn-primary">View the Complete Evidence Vault</a>
+                    <a onclick="document.getElementById('media').scrollIntoView({behavior:'smooth'})" class="btn-secondary">Download Investigative Media Dossier</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-container">
+            <div class="grid-two-col">
+                <div class="content-block">
+                    <h2>The Story</h2>
+                    <p>This platform serves as a permanent, public digital archive preserving the physical facts of a severe, life-altering spinal and psychiatric injury sustained by Elias. Following a severe accident, the fight for rehabilitation, compensation, and medical accountability has evolved from a straightforward statutory claim into a multi-layered confrontation against an institutional "army" of state funds and corporate medical entities.</p>
+                    <p>Rather than resolving a clear-cut case of severe physical harm, the statutory bodies tasked with protecting South African citizens—the Road Accident Fund (RAF), the Compensation Fund (COIDA / Rand Mutual Assurance), and a concurrent Private Insurer—have chosen to implement a strategy of continuous obstruction and administrative non-performance. This platform removes their anonymity by publishing the absolute truth in real-time.</p>
+                </div>
+
+                <div class="dashboard-panel">
+                    <h3>📊 Live Track Dashboard</h3>
+                    <div class="track-card">
+                        <h4>RMA / Compensation Commissioner <span class="track-id">WG.29</span></h4>
+                        <small style="color: var(--secondary-charcoal);">Section 91 Objection — Psychiatric Trauma Omission</small>
+                        <span class="track-status pending">⏳ Pending Response</span>
+                    </div>
+                    <div class="track-card">
+                        <h4>HPCSA <span class="track-id">ETH-001</span></h4>
+                        <small style="color: var(--secondary-charcoal);">Ethical Complaint — Dr. Ramushu</small>
+                        <span class="track-status pending">⏳ Under Review</span>
+                    </div>
+                    <div class="track-card">
+                        <h4>Public Protector <span class="track-id">CMS 93110/2026</span></h4>
+                        <small style="color: var(--secondary-charcoal);">Administrative Non-Performance Escalation</small>
+                        <span class="track-status pending">⏳ Filed</span>
+                    </div>
+                    <div class="track-card">
+                        <h4>Road Accident Fund <span class="track-id">RAF-1 / RAF-4</span></h4>
+                        <small style="color: var(--secondary-charcoal);">Serious Injury Report — Statutory Window</small>
+                        <span class="track-status expired">⚠️ Deadline Expired</span>
+                    </div>
+                    <div class="counter-grid">
+                        <div class="counter-box"><span class="counter-number">4</span><span class="counter-label">Active Fronts</span></div>
+                        <div class="counter-box"><span class="counter-number">12+</span><span class="counter-label">Years of Delay</span></div>
+                        <div class="counter-box"><span class="counter-number">47</span><span class="counter-label">Documents Logged</span></div>
+                        <div class="counter-box"><span class="counter-number">3</span><span class="counter-label">Institutions Challenged</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-heading">The Three Operational Fronts</h2>
+            <div class="fronts-grid">
+                <div class="front-card">
+                    <h3>🏛️ The COIDA / RMA Front</h3>
+                    <p><strong>(Occupational Injury Disablement):</strong> This claim involves the deliberate exclusion of documented psychiatric trauma from formal compensation assessments. Despite comprehensive medical evidence establishing severe post-traumatic stress and spinal injury, administrative bodies have actively manipulated the claim profile. This site hosts the formal paperwork, including the Section 91 Objection (Form WG.29) lodged to legally compel the statutory administrators to recognize the full clinical reality of the case.</p>
+                </div>
+                <div class="front-card">
+                    <h3>🚗 The Road Accident Fund (RAF) Front</h3>
+                    <p><strong>(Statutory Quantum):</strong> A battle focused on systemic structural delays, where statutory timelines are intentionally ignored, forcing individual claimants into decades of exhausting litigation over clear-cut, objective damages.</p>
+                </div>
+                <div class="front-card">
+                    <h3>🏢 The Private Insurance Front</h3>
+                    <p><strong>(Corporate Obstruction):</strong> Exposing how private financial entities hide behind state bureaucracy, withholding policy payouts by exploiting the intentional delays generated by government funds.</p>
+                </div>
+            </div>
+
+            <!-- EVIDENCE VAULT -->
+            <h2 class="section-heading" id="vault">The Evidence Vault</h2>
+            <p class="section-intro"><em>All highly sensitive personal data (ID numbers, home addresses) have been rigorously redacted in compliance with POPIA. Documents are hosted on secure, access-controlled infrastructure.</em></p>
+
+            <div class="vault-grid">
+                <div class="vault-display">
+                    <div class="preview-placeholder">📁 Module 01 — Medical Assessments</div>
+                    <div class="vault-display-header">
+                        <span>🩺 Primary Medical Assessments & Specialist Diagnoses</span>
+                        <span class="badge">3 Files</span>
+                    </div>
+                    <ul class="vault-item-list">
+                        <li class="vault-item"><a href="#" target="_blank">First Medical Report (RMA Archive)</a><span class="vault-meta">PDF • 2.4MB</span></li>
+                        <li class="vault-item"><a href="#" target="_blank">Psychiatric & Psychological Trauma Report (Dr Kewana)</a><span class="vault-meta">PDF • 3.1MB</span></li>
+                        <li class="vault-item"><a href="#" target="_blank">Independent Orthopaedic & Spinal Specialist Assessments</a><span class="vault-meta">PDF • 4.8MB</span></li>
+                    </ul>
+                </div>
+
+                <div class="vault-display">
+                    <div class="preview-placeholder">📁 Module 02 — Statutory Forms</div>
+                    <div class="vault-display-header">
+                        <span>⚖️ Statutory Discrepancies & Disputed Forms</span>
+                        <span class="badge">3 Files</span>
+                    </div>
+                    <ul class="vault-item-list">
+                        <li class="vault-item"><a href="#" target="_blank">Form WG.29 (Section 91 Objection Submission)</a><span class="vault-meta">PDF • 1.2MB</span></li>
+                        <li class="vault-item"><a href="#" target="_blank">Form W.Cl.303 (First Medical Report — PTSD)</a><span class="vault-meta">PDF • 2.7MB</span></li>
+                        <li class="vault-item"><a href="#" target="_blank">HPCSA Ethical Infraction Dossier (Dr Ramushu)</a><span class="vault-meta">PDF • 5.3MB</span></li>
+                    </ul>
+                </div>
+
+                <div class="vault-display">
+                    <div class="preview-placeholder">📁 Module 03 — Financial Impact</div>
+                    <div class="vault-display-header">
+                        <span>💰 Financial & Actuarial Impact Assessments</span>
+                        <span class="badge">2 Files</span>
+                    </div>
+                    <ul class="vault-item-list">
+                        <li class="vault-item"><a href="#" target="_blank">Pre-Injury Earnings Certificate & Loss of Future Income Actuarial Report</a><span class="vault-meta">PDF • 3.6MB</span></li>
+                        <li class="vault-item"><a href="#" target="_blank">Itemised Historic Medical Expenses & Unfunded Rehabilitation Accounts</a><span class="vault-meta">PDF • 1.9MB</span></li>
+                    </ul>
+                </div>
+
+                <div class="vault-display">
+                    <div class="preview-placeholder">📁 Module 04 — Oversight Correspondence</div>
+                    <div class="vault-display-header">
+                        <span>🏛️ SAPS Dockets & Public Protector Filings</span>
+                        <span class="badge">4 Files</span>
+                    </div>
+                    <ul class="vault-item-list">
+                        <li class="vault-item"><a href="#" target="_blank">Logged SAPS Case Numbers & Open Dockets</a><span class="vault-meta">PDF • 890KB</span></li>
+                        <li class="vault-item"><a href="#" target="_blank">Stamped Public Protector Correspondence (CMS 93110/2026)</a><span class="vault-meta">PDF • 1.5MB</span></li>
+                        <li class="vault-item"><a href="#" target="_blank">Union Correspondence & Representation Failures</a><span class="vault-meta">PDF • 2.1MB</span></li>
+                        <li class="vault-item"><a href="#" target="_blank">Socio-Economic Human Rights Impact Dossier</a><span class="vault-meta">PDF • 3.4MB</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="inspirational-quote-box">
+                <blockquote>"The true measure of an institution's integrity is not how it behaves when things go smoothly, but how it responds when it breaks its own laws to protect its bottom line."</blockquote>
+            </div>
+
+            <section id="media" class="media-section">
+                <h2>Investigative Media Dossier & Newsroom Alert</h2>
+                <p>The documentation hosted on this platform outlines more than just an isolated personal injury claim; it reveals a systemic blueprint of how South African corporations and state-backed insurance institutions intentionally delay, block, and exhaust sick or injured workers.</p>
+                <ul class="media-list">
+                    <li>Al Jazeera Investigative Unit</li>
+                    <li>Carte Blanche (M-Net)</li>
+                    <li>GroundUp News</li>
+                    <li>AmaBhungane Centre for Investigative Journalism</li>
+                    <li>Daily Maverick (Scorpio)</li>
+                </ul>
+                <a href="#" class="btn-primary">📥 Download Full Media Dossier PDF</a>
+                <p style="margin-top: 1.5rem; font-size: 0.85rem;">📧 For Press Inquiries or Pro-Bono Legal Advisory: <a href="mailto:press@yourdomain.co.za" style="color: #E2E8F0;">press@yourdomain.co.za</a></p>
+            </section>
+        </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- ==================== PAGE VIEW: ABOUT ==================== -->
+    <!-- ========================================================== -->
+    <div id="view-about" class="page-view">
+        <section class="hero-section">
+            <div class="hero-container">
+                <h1>About the Campaign</h1>
+                <p>Confronting corporate accountability and state fund negligence in South Africa. An open-source archive documenting systemic delays across the RAF, COIDA, RMA, and private insurance.</p>
+            </div>
+        </section>
+
+        <div class="main-container">
+            <div class="content-block">
+                <h2>Transforming Silent Administrative Abuse into Public Accountability</h2>
+                <p>This platform was not built merely to chronicle a personal grievance. It exists as an independent, transparent, and unassailable digital repository dedicated to exposing the structural mechanics of institutional bad faith within the South African social security and corporate frameworks.</p>
+                <p>For over a decade, the individual behind this campaign—Elias—has navigated a complex, multi-front legal battle against the Employer (Valterra), the Compensation Fund (COIDA / Rand Mutual Assurance), and a concurrent Private Insurance Entity following a severe, life-altering occupational injury.</p>
+                <p>Instead of receiving lawful adjudication and statutory relief, Elias was met with calculated stall tactics, administrative file-swapping, and a coordinated strategy designed to exhaust a sick worker's resources until they abandon their constitutional rights. This website removes the shield of institutional anonymity. By publishing verified, physical facts, this campaign establishes a permanent archive of public accountability.</p>
+            </div>
+
+            <div class="content-block">
+                <h2>The Core Objectives</h2>
+                <p>Our operational mandate is governed by three strict pillars:</p>
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <h3>1. Enforce Statutory Adjudication</h3>
+                        <p>Forcing the Compensation Commissioner, the Public Protector, and licensed insurers (RMA) to execute their lawful duties without manufacturing undue delays or stalling critical processes like the Section 91 Objection (Form WG.29).</p>
+                    </div>
+                    <div class="objective-card">
+                        <h3>2. Protect and Preserve Evidence</h3>
+                        <p>Utilizing secure, public infrastructure to lock down medical diagnoses, clinical imaging, and official records so they can never be quietly deleted, altered, or manipulated behind closed doors by corporate-contracted doctors.</p>
+                    </div>
+                    <div class="objective-card">
+                        <h3>3. Educate Vulnerable Workers</h3>
+                        <p>Providing an open-source litigation blueprint for thousands of South African miners, construction workers, and citizens who find themselves discarded by massive corporations the moment they suffer a workplace injury or contract an occupational disease.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2>The Reality of the "Institutional Army"</h2>
+                <p>In South Africa, the state and corporate systems often rely on a "war of attrition." They know that an injured individual surviving on a minimal pension fund cannot afford decades of high-level litigation. They expect you to go away quietly.</p>
+                <p>When you challenge a multi-billion Rand mining corporation or a state-backed fund, you are not fighting a single office; you are fighting a coordinated "army" of legal counsels, corporate medical panels, and compromised administrative pipelines. They exploit loopholes, ignore their own 14-day tracking guidelines, misdirect claimants with incorrect forms, and weaponize time to beat you before you ever step foot into a tribunal or a High Court.</p>
+                <p><strong>This platform changes the battlefield.</strong> By routing every interaction, every failure, and every piece of medical proof into the open light, we level the playing field. Money and corporate lobbying cannot bribe an unassailable digital archive.</p>
+            </div>
+
+            <div class="content-block">
+                <h2>Our Stance on Defamation and Legal Protection</h2>
+                <p>Every document hosted within our Evidence Vault and mapped across our Priority Stakeholder Matrix consists strictly of objective, physical data. This includes stamped public protector files, signed specialist reports, registered SAPS case numbers, and official corporate emails.</p>
+                <p>We do not deal in speculation or emotional allegations. We deal in undisputed, empirical facts. This platform operates in absolute compliance with the <strong>Protection of Personal Information Act (POPIA)</strong> and utilizes the transparent spirit of the <strong>Promotion of Access to Information Act (PAIA)</strong> as a shield for public interest advocacy.</p>
+            </div>
+
+            <div class="disclaimer-box">
+                <h2>Legal Disclaimer & Management Note</h2>
+                <p>To protect the personal space, safety, and health of the claimant, this platform, its public communication pipelines, and its social media networks are securely monitored and managed by an independent Public Relations and Legal Support Framework. All statutory inquiries from stakeholders or regulatory bodies must be directed through the formal contact channels provided on this site.</p>
+            </div>
+
+            <blockquote class="campaign-quote">"True transparency is an absolute shield; when you bring the truth out into the open light, you change the battlefield completely."</blockquote>
+        </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- ==================== PAGE VIEW: SERVICES ==================== -->
+    <!-- ============================================================= -->
+    <div id="view-services" class="page-view">
+        <section class="hero-section">
+            <div class="hero-container">
+                <h1>Services: The Advocacy Toolkit</h1>
+                <p>Open-source, litigation-ready templates and procedural guides for navigating South African statutory compensation systems.</p>
+            </div>
+        </section>
+
+        <div class="main-container">
+            <div class="card-grid-3">
+                <div class="tool-card">
+                    <h3>📋 Form WG.29: Section 91 Objection Blueprint</h3>
+                    <p>A comprehensive template for lodging a formal objection when the Compensation Fund or licensed insurer (e.g., RMA) excludes documented psychiatric trauma from occupational injury assessments.</p>
+                    <ul>
+                        <li>Step-by-step procedural guide for completing Form WG.29</li>
+                        <li>Legal citations: COIDA Section 91</li>
+                        <li>Evidence checklist: Medical reports, psychiatric assessments</li>
+                        <li>Submission protocols: Registered mail, email tracking</li>
+                        <li>Escalation pathway if objection is ignored beyond 30 days</li>
+                    </ul>
+                    <a href="#" class="download-btn">📥 Download WG.29 Template [PDF]</a>
+                </div>
+
+                <div class="tool-card">
+                    <h3>⚖️ HPCSA Ethical Infraction Reporting Guide</h3>
+                    <p>A procedural framework for lodging formal ethical complaints with the Health Professions Council of South Africa when medical practitioners operate in bad faith or manipulate clinical diagnoses.</p>
+                    <ul>
+                        <li>Identifying unethical conduct: Red flags for medical bad faith</li>
+                        <li>Documentation requirements: Medical records, correspondence</li>
+                        <li>HPCSA complaint form completion guide</li>
+                        <li>Timeline expectations: Statutory response windows</li>
+                        <li>Parallel actions: Simultaneous Public Protector reporting</li>
+                    </ul>
+                    <a href="#" class="download-btn">📥 Download HPCSA Guide [PDF]</a>
+                </div>
+
+                <div class="tool-card">
+                    <h3>🏛️ Public Protector Escalation Framework</h3>
+                    <p>A structured template for escalating structural administrative failures directly to the Office of the Public Protector when statutory bodies fail to execute their mandates.</p>
+                    <ul>
+                        <li>Constitutional basis: Section 182 of the Constitution</li>
+                        <li>Complaint categories: Maladministration, undue delay</li>
+                        <li>Evidence compilation: Timeline, stamped correspondence</li>
+                        <li>Submission process: Online portal, email, registered mail</li>
+                        <li>Follow-up strategy: Tracking case numbers</li>
+                    </ul>
+                    <a href="#" class="download-btn">📥 Download Framework [PDF]</a>
+                </div>
+
+                <div class="tool-card">
+                    <h3>🚗 RAF Claim Tracking & Delay Documentation</h3>
+                    <p>A systematic approach to documenting every interaction with the Road Accident Fund, tracking statutory deadline violations, and building an unassailable record of institutional delay.</p>
+                    <ul>
+                        <li>RAF 1 claim form completion checklist</li>
+                        <li>RAF 4 (Serious Injury Assessment) tracking protocol</li>
+                        <li>Statutory deadline calculator: 120-day validation window</li>
+                        <li>Delay documentation template: Email logs, screenshots</li>
+                        <li>Legal escalation: When to file a summons</li>
+                    </ul>
+                    <a href="#" class="download-btn">📥 Download RAF Toolkit [PDF]</a>
+                </div>
+
+                <div class="tool-card">
+                    <h3>🏢 Employer Liability & Unfair Dismissal Defense</h3>
+                    <p>A framework for documenting corporate liability in occupational injury cases, challenging unfair dismissals weaponized to evade long-term statutory pension and medical liabilities.</p>
+                    <ul>
+                        <li>Occupational Health and Safety Act (OHSA) employer duties</li>
+                        <li>CCMA dismissal dispute timeline: 30-day referral window</li>
+                        <li>Evidence compilation: Medical certificates, incident reports</li>
+                        <li>Employer non-compliance documentation: W.Cl.2 failures</li>
+                        <li>Labour Court escalation pathway</li>
+                    </ul>
+                    <a href="#" class="download-btn">📥 Download Employer Guide [PDF]</a>
+                </div>
+
+                <div class="tool-card">
+                    <h3>🔒 POPIA Compliance & Evidence Redaction Protocol</h3>
+                    <p>A practical guide for ensuring all publicly shared documentation complies with the Protection of Personal Information Act (POPIA), protecting third-party privacy while maintaining evidentiary integrity.</p>
+                    <ul>
+                        <li>Identifying personal information: ID numbers, addresses</li>
+                        <li>Redaction tools: Free PDF editors and sanitization software</li>
+                        <li>What to redact vs. what to preserve: Legal boundaries</li>
+                        <li>Consent protocols: When third-party permission is required</li>
+                        <li>Public interest exception: When POPIA restrictions do not apply</li>
+                    </ul>
+                    <a href="#" class="download-btn">📥 Download POPIA Guide [PDF]</a>
+                </div>
+            </div>
+
+            <div class="template-preview">
+                <h3>📄 Sample Template Structure: Form WG.29 Section 91 Objection (Excerpt)</h3>
+                <pre>FORM WG.29: OBJECTION IN TERMS OF SECTION 91 OF THE COMPENSATION FOR
+OCCUPATIONAL INJURIES AND DISEASES ACT 130 OF 1993
+
+TO: The Compensation Commissioner / Licensed Insurer (RMA)
+FROM: [Claimant Name / Legal Representative]
+DATE: [DD/MM/YYYY]
+CLAIM REFERENCE NUMBER: [Insert Claim Number]
+
+SUBJECT: FORMAL OBJECTION TO DECISION / ADMINISTRATIVE NON-PERFORMANCE
+
+1. GROUNDS FOR OBJECTION:
+   1.1. The Compensation Fund / Licensed Insurer has failed to recognize
+        documented psychiatric trauma (PTSD) as part of the primary
+        occupational injury profile, despite comprehensive medical evidence
+        submitted via Form W.Cl.303.
+   1.2. The statutory 14-day response window for acknowledging the
+        Section 91 Objection has lapsed without formal communication.
+   1.3. Administrative file-swapping (Claim ending in -57 crossed with
+        Claim ending in -62) has been documented, constituting maladministration.
+
+2. LEGAL CITATIONS:
+   - Compensation for Occupational Injuries and Diseases Act 130 of 1993, Section 91
+   - Promotion of Administrative Justice Act 3 of 2000 (PAJA)
+   - Constitution of the Republic of South Africa, Section 33 (Just Administrative Action)
+
+3. SUPPORTING EVIDENCE ATTACHED:
+   - Form W.Cl.303: First Medical Report in Respect of PTSD (Dr. Kewana)
+   - Psychiatric Assessment Report (dated [DD/MM/YYYY])
+   - Correspondence log showing 45 days of non-responsiveness
+   - Screenshots of electronic claim registry showing file-swapping
+
+4. DEMAND:
+   The claimant hereby demands that the Compensation Commissioner / Licensed Insurer:
+   4.1. Immediately recognize the psychiatric trauma component of the claim.
+   4.2. Provide a formal written response within 14 days of receipt.
+   4.3. Cease administrative file-swapping and consolidate all medical evidence
+        under a single claim reference.
+
+FAILURE TO COMPLY:
+Should the Compensation Commissioner / Licensed Insurer fail to respond within
+the prescribed statutory window, the claimant will escalate this matter to the
+Office of the Public Protector and pursue High Court review under PAJA.
+
+SIGNED: ___________________________
+DATE: _____________________________
+CONTACT: ___________________________</pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- ==================== PAGE VIEW: PROJECTS ==================== -->
+    <!-- ============================================================= -->
+    <div id="view-projects" class="page-view">
+        <section class="hero-section">
+            <div class="hero-container">
+                <h1>Projects & Active Fronts</h1>
+                <p>The central multimedia and investigative archive housing active sub-campaign modules, open career/volunteer paths, the independent supplier database, and the media-ready news vault.</p>
+            </div>
+        </section>
+
+        <div class="main-container">
+
+            <!-- ==================== MULTIMEDIA EVIDENCE GALLERY ==================== -->
+            <h2 class="section-heading" id="multimedia-gallery">🎬 Multimedia Evidence Gallery</h2>
+            <p class="section-intro">Broadcast-ready video briefings, anonymized clinical imaging, and documented audio records. All media is timestamped, verified, and hosted on secure infrastructure.</p>
+
+            <!-- VIDEO SECTION -->
+            <h3 style="color: var(--primary-navy); font-size: 1.3rem; margin: 2rem 0 1rem; border-left: 5px solid var(--accent-warning); padding-left: 0.75rem;">📹 Video Evidence Library</h3>
+            <div class="media-gallery-grid">
+                
+                <div class="media-card-featured">
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <span class="play-icon">▶</span>
+                            <span class="video-label">CASE SUMMARY BRIEFING</span>
+                            <span class="video-duration">12:34</span>
+                        </div>
+                    </div>
+                    <div class="media-card-content">
+                        <h4>Case Summary: RAF, COIDA, and Private Insurance Blockages</h4>
+                        <p>A comprehensive walkthrough explaining the intersection of statutory delays across all three operational fronts. Includes timeline visualization and document references.</p>
+                        <div class="media-meta">
+                            <span>📅 Published: Oct 2026</span>
+                            <span>👁️ 1,247 views</span>
+                        </div>
+                        <a href="#" class="download-btn">▶ Watch Full Video</a>
+                    </div>
+                </div>
+
+                <div class="media-card-featured">
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <span class="play-icon">▶</span>
+                            <span class="video-label">MEDICAL EVIDENCE WALKTHROUGH</span>
+                            <span class="video-duration">08:21</span>
+                        </div>
+                    </div>
+                    <div class="media-card-content">
+                        <h4>Psychiatric Trauma Documentation: Form W.Cl.303 Explained</h4>
+                        <p>Detailed explanation of how psychiatric trauma was systematically excluded from the primary injury profile, with side-by-side comparison of medical reports.</p>
+                        <div class="media-meta">
+                            <span>📅 Published: Sep 2026</span>
+                            <span>👁️ 892 views</span>
+                        </div>
+                        <a href="#" class="download-btn">▶ Watch Full Video</a>
+                    </div>
+                </div>
+
+                <div class="media-card-featured">
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <span class="play-icon">▶</span>
+                            <span class="video-label">EMPLOYER LIABILITY EXPOSÉ</span>
+                            <span class="video-duration">15:47</span>
+                        </div>
+                    </div>
+                    <div class="media-card-content">
+                        <h4>Valterra / Anglo Platinum: Unfair Dismissal Timeline</h4>
+                        <p>Documented sequence showing how corporate medical evictions and weaponized dismissals were used to evade long-term statutory pension and medical liabilities.</p>
+                        <div class="media-meta">
+                            <span>📅 Published: Aug 2026</span>
+                            <span>👁️ 2,103 views</span>
+                        </div>
+                        <a href="#" class="download-btn">▶ Watch Full Video</a>
+                    </div>
+                </div>
+
+                <div class="media-card-featured">
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <span class="play-icon">▶</span>
+                            <span class="video-label">FILE-SWAPPING EXPOSED</span>
+                            <span class="video-duration">06:58</span>
+                        </div>
+                    </div>
+                    <div class="media-card-content">
+                        <h4>RMA Electronic Claim Swapping: Evidence Walkthrough</h4>
+                        <p>Screen-by-screen breakdown of how physical injury files (Claim -57) were systematically crossed with psychiatric files (Claim -62) to manufacture claim repudiation.</p>
+                        <div class="media-meta">
+                            <span>📅 Published: Jul 2026</span>
+                            <span>👁️ 1,589 views</span>
+                        </div>
+                        <a href="#" class="download-btn">▶ Watch Full Video</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- IMAGE GALLERY SECTION -->
+            <h3 style="color: var(--primary-navy); font-size: 1.3rem; margin: 3rem 0 1rem; border-left: 5px solid var(--accent-warning); padding-left: 0.75rem;">🖼️ Clinical Imaging & Document Archive</h3>
+            <div class="image-gallery-grid">
+                
+                <div class="image-card">
+                    <div class="image-placeholder">
+                        <span class="image-icon">🩻</span>
+                        <span class="image-label">SPINAL MRI SCAN</span>
+                    </div>
+                    <div class="image-card-content">
+                        <h4>Certified Medical Scan: Spinal Injury</h4>
+                        <p>High-resolution, anonymized clinical imaging displaying the exact structural nature of the spinal injury. Redacted for POPIA compliance.</p>
+                        <a href="#" class="download-btn">🔍 View Full Resolution</a>
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder">
+                        <span class="image-icon">📄</span>
+                        <span class="image-label">STAMPED DOCUMENT</span>
+                    </div>
+                    <div class="image-card-content">
+                        <h4>Public Protector Submission Receipt</h4>
+                        <p>Photographic receipt of formal case handover (CMS Ref: 93110/2026) with official stamp and timestamp.</p>
+                        <a href="#" class="download-btn">🔍 View Full Resolution</a>
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder">
+                        <span class="image-icon">📋</span>
+                        <span class="image-label">CORRESPONDENCE</span>
+                    </div>
+                    <div class="image-card-content">
+                        <h4>RMA Email: File-Swapping Admission</h4>
+                        <p>Screenshot of internal email acknowledging the crossing of physical injury files (Claim -57) with psychiatric files (Claim -62).</p>
+                        <a href="#" class="download-btn">🔍 View Full Resolution</a>
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder">
+                        <span class="image-icon">🏥</span>
+                        <span class="image-label">MEDICAL REPORT</span>
+                    </div>
+                    <div class="image-card-content">
+                        <h4>Dr. Kewana Psychiatric Assessment</h4>
+                        <p>Sealed psychiatric trauma evaluation documenting severe PTSD. Redacted patient identifiers preserved for evidentiary integrity.</p>
+                        <a href="#" class="download-btn">🔍 View Full Resolution</a>
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder">
+                        <span class="image-icon">⚖️</span>
+                        <span class="image-label">LEGAL FILING</span>
+                    </div>
+                    <div class="image-card-content">
+                        <h4>Form WG.29 Section 91 Objection</h4>
+                        <p>Stamped copy of the formal objection lodged against RMA for exclusion of psychiatric trauma from compensation assessment.</p>
+                        <a href="#" class="download-btn">🔍 View Full Resolution</a>
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder">
+                        <span class="image-icon">📊</span>
+                        <span class="image-label">ACTUARIAL REPORT</span>
+                    </div>
+                    <div class="image-card-content">
+                        <h4>Loss of Future Earnings Calculation</h4>
+                        <p>Actuarial report showing pre-injury earnings trajectory and calculated future financial impact. Confidential data redacted.</p>
+                        <a href="#" class="download-btn">🔍 View Full Resolution</a>
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder">
+                        <span class="image-icon">🚨</span>
+                        <span class="image-label">SAPS DOCKET</span>
+                    </div>
+                    <div class="image-card-content">
+                        <h4>Registered SAPS Case Number</h4>
+                        <p>Official docket registration confirming formal lodging of fraud allegations relating to occupational accident file alterations.</p>
+                        <a href="#" class="download-btn">🔍 View Full Resolution</a>
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder">
+                        <span class="image-icon">🏭</span>
+                        <span class="image-label">WORKPLACE RECORD</span>
+                    </div>
+                    <div class="image-card-content">
+                        <h4>Employer Clinic Attendance Register</h4>
+                        <p>Documented proof that only a clinic male nurse was on duty during the primary injury report, contradicting employer demands for doctor-signed forms.</p>
+                        <a href="#" class="download-btn">🔍 View Full Resolution</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- AUDIO SECTION -->
+            <h3 style="color: var(--primary-navy); font-size: 1.3rem; margin: 3rem 0 1rem; border-left: 5px solid var(--accent-warning); padding-left: 0.75rem;">🎙️ Audio Records & Administrative Logs</h3>
+            <div class="audio-gallery-grid">
+                
+                <div class="audio-card">
+                    <div class="audio-player-mock">
+                        <div class="audio-controls">
+                            <span class="play-button">▶</span>
+                            <div class="audio-waveform">
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                            </div>
+                            <span class="audio-duration">04:32</span>
+                        </div>
+                    </div>
+                    <div class="audio-card-content">
+                        <h4>Administrative Records Log: RMA Non-Responsiveness</h4>
+                        <p>Documented verbal tracking of status follow-ups, highlighting the timeline of non-responsiveness from the Compensation Fund. Timestamped call logs with reference numbers.</p>
+                        <div class="media-meta">
+                            <span>📅 Recorded: Aug 2026</span>
+                            <span>🎧 4:32 duration</span>
+                        </div>
+                        <a href="#" class="download-btn">🎧 Listen to Recording</a>
+                    </div>
+                </div>
+
+                <div class="audio-card">
+                    <div class="audio-player-mock">
+                        <div class="audio-controls">
+                            <span class="play-button">▶</span>
+                            <div class="audio-waveform">
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                            </div>
+                            <span class="audio-duration">06:15</span>
+                        </div>
+                    </div>
+                    <div class="audio-card-content">
+                        <h4>HPCSA Complaint Filing: Verbal Confirmation</h4>
+                        <p>Recorded confirmation of ethical complaint submission against Dr. Ramushu. Includes case reference number and expected review timeline.</p>
+                        <div class="media-meta">
+                            <span>📅 Recorded: Jul 2026</span>
+                            <span>🎧 6:15 duration</span>
+                        </div>
+                        <a href="#" class="download-btn">🎧 Listen to Recording</a>
+                    </div>
+                </div>
+
+                <div class="audio-card">
+                    <div class="audio-player-mock">
+                        <div class="audio-controls">
+                            <span class="play-button">▶</span>
+                            <div class="audio-waveform">
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                            </div>
+                            <span class="audio-duration">09:48</span>
+                        </div>
+                    </div>
+                    <div class="audio-card-content">
+                        <h4>Public Protector Intake Call: Case CMS 93110/2026</h4>
+                        <p>Full recorded intake call with the Office of the Public Protector documenting the formal escalation of administrative non-performance by the Compensation Commissioner.</p>
+                        <div class="media-meta">
+                            <span>📅 Recorded: Jun 2026</span>
+                            <span>🎧 9:48 duration</span>
+                        </div>
+                        <a href="#" class="download-btn">🎧 Listen to Recording</a>
+                    </div>
+                </div>
+
+                <div class="audio-card">
+                    <div class="audio-player-mock">
+                        <div class="audio-controls">
+                            <span class="play-button">▶</span>
+                            <div class="audio-waveform">
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                                <div class="waveform-bar"></div>
+                            </div>
+                            <span class="audio-duration">11:22</span>
+                        </div>
+                    </div>
+                    <div class="audio-card-content">
+                        <h4>Trade Union Abandonment: NUM Representation Failure</h4>
+                        <p>Recorded correspondence documenting the total abandonment of a critically injured worker during an unfair corporate dismissal process by the representing trade union.</p>
+                        <div class="media-meta">
+                            <span>📅 Recorded: May 2026</span>
+                            <span>🎧 11:22 duration</span>
+                        </div>
+                        <a href="#" class="download-btn">🎧 Listen to Recording</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ==================== END MULTIMEDIA GALLERY ==================== -->
+
+            <h2 class="section-heading">🎥 Media & News Vault</h2>
+            <p class="section-intro">A live digital newsroom hosting public education content, distributing newsletters, and providing journalists with immediate broadcast-ready raw materials.</p>
+            <div class="card-grid-3">
+                <div class="tool-card">
+                    <h3>📰 Campaign Blog</h3>
+                    <p>Latest analytical breakdowns of institutional conduct.</p>
+                    <ul>
+                        <li>Institutional Erasure: How Psychiatric Trauma is Stripped from Occupational Injury Claims</li>
+                        <li>The 20-Year Litigious Strategy: Why State Funds Rely on Systemic Delays</li>
+                    </ul>
+                    <a href="#" class="download-btn">Read Latest Post →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>📧 Newsletter Archive</h3>
+                    <p>Monthly dispatches on statutory accountability.</p>
+                    <ul>
+                        <li>Issue #04: The 20-Year Litigious Strategy</li>
+                        <li>Issue #03: Independent Medical Assessments vs. Administrative Bad Faith</li>
+                    </ul>
+                    <a href="#" class="download-btn">📥 Subscribe to Newsletter</a>
+                </div>
+                <div class="tool-card">
+                    <h3>🎬 Multimedia Evidence Library</h3>
+                    <p>Broadcast-ready audio, video, and clinical imaging.</p>
+                    <ul>
+                        <li>[Video] Case Summary Briefing: RAF, COIDA, Private Insurance Blockages</li>
+                        <li>[Audio] Administrative Records Log: Timeline of Non-Responsiveness</li>
+                        <li>[Gallery] Anonymized Clinical Imaging & Stamped Submissions</li>
+                    </ul>
+                    <a onclick="document.getElementById('multimedia-gallery').scrollIntoView({behavior:'smooth'})" class="download-btn" style="cursor:pointer;">↑ Jump to Gallery</a>
+                </div>
+            </div>
+
+            <h2 class="section-heading">💼 Opportunities Portal</h2>
+            <p class="section-intro">Transforming a personal battle into a structured campaign means creating operational opportunities. This section builds an ecosystem of professional suppliers and clean job/volunteer paths.</p>
+            <div class="card-grid-2">
+                <div class="tool-card">
+                    <h3>🤝 Supply Chain & Vendor Network</h3>
+                    <p>We invite verified expressions of interest from uncompromised South African partners:</p>
+                    <ul>
+                        <li>Independent Medical-Legal Experts (Neurologists, Psychiatrists, Occupational Therapists)</li>
+                        <li>Actuarial & Financial Consultants (Future loss of earnings, quantum reports)</li>
+                        <li>Digital Security & Web Infrastructure Providers</li>
+                    </ul>
+                    <a onclick="navigateTo('contacts')" class="download-btn" style="cursor:pointer;">📋 Submit Supplier Credential →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>👥 Campaign Careers & Support Roles</h3>
+                    <p>Open contractual and volunteer campaign opportunities:</p>
+                    <ul>
+                        <li>Investigative Research Assistants (public records, statutory deadline tracking)</li>
+                        <li>Digital Content & Media Coordinators (dossier dissemination)</li>
+                        <li>Community Advocacy Officers (assisting other vulnerable claimants)</li>
+                    </ul>
+                    <a onclick="navigateTo('contacts')" class="download-btn" style="cursor:pointer;">✉️ View Open Positions / Apply →</a>
+                </div>
+            </div>
+
+            <h2 class="section-heading">🎯 Priority Stakeholder Enforcement Matrix</h2>
+            <p class="section-intro">To convert this platform into an unyielding database for accountability, we map critical sectors, their institutional codes, exact administrative failures, and statutory duties. This forces all actors out of the shadows.</p>
+
+            <div class="matrix-section">
+                <div class="matrix-section-title">🏛️ Section A: Law Enforcement & Oversight Entities</div>
+                <div class="stakeholder-card">
+                    <h3>1. The South African Police Service (SAPS)</h3>
+                    <p><strong>Enforcement Mandate:</strong> Statutory Duty to Prevent, Combat, and Investigate Crime (SAPS Act 68 of 1995).</p>
+                    <p><strong>Active Infraction Log:</strong> Systemic failure to investigate fraudulent alterings of public or occupational accident files, and absolute delay in processing dockets relating to unlawful corporate evictions or workplace-induced physical and psychological safety violations.</p>
+                    <a href="#" class="transparency-link">📂 View Logged SAPS Case Numbers & Open Dockets</a>
+                </div>
+                <div class="stakeholder-card">
+                    <h3>2. The Office of the Public Protector (CMS Ref: 93110/2026)</h3>
+                    <p><strong>Enforcement Mandate:</strong> Constitutional Protection Against Maladministration and Systemic Delay.</p>
+                    <p><strong>Active Infraction Log:</strong> Experiencing severe administrative inertia. Exposing the total failure to assign an active investigator within the prescribed statutory 14-day window to investigate the Compensation Commissioner's failure to act.</p>
+                    <a href="#" class="transparency-link">📂 View Stamped Public Protector Correspondence</a>
+                </div>
+            </div>
+
+            <div class="matrix-section">
+                <div class="matrix-section-title">🛠️ Section B: Organized Labour & Employee Unions</div>
+                <div class="stakeholder-card">
+                    <h3>1. Workplace Trade Unions (e.g., NUM / AMCU)</h3>
+                    <p><strong>Enforcement Mandate:</strong> Constitutional Obligation to Support, Represent, and Protect Injured and Vulnerable Members (Labour Relations Act).</p>
+                    <p><strong>Active Infraction Log:</strong> Total abandonment of a critically injured and traumatized worker during an unfair corporate dismissal process, and failing to compel the employer to file statutory injury documentation such as Form W.Cl.2 or Form W.Cl.22.</p>
+                    <a href="#" class="transparency-link">📂 View Union Correspondence & Representation Failures</a>
+                </div>
+            </div>
+
+            <div class="matrix-section">
+                <div class="matrix-section-title">🛑 Section C: Gender-Based Violence (GBV) & Human Rights Watchdogs</div>
+                <div class="stakeholder-card">
+                    <h3>1. Institutional GBV & Human Rights Coalitions</h3>
+                    <p><strong>Enforcement Mandate:</strong> National Strategic Plan (NSP) on Gender-Based Violence and Femicide, and the South African Human Rights Commission (SAHRC).</p>
+                    <p><strong>Active Infraction Log:</strong> Highlighting how corporate medical evictions and the structural withholding of statutory disability funds create systemic vulnerability and socio-economic displacement for injured workers and their dependent families.</p>
+                    <a href="#" class="transparency-link">📂 View Socio-Economic Human Rights Impact Dossier</a>
+                </div>
+            </div>
+
+            <div class="matrix-section">
+                <div class="matrix-section-title">🩺 Section D: The Medical Panel & All Doctors (Psychiatric & Physical)</div>
+                <div class="stakeholder-card">
+                    <h3>1. Treating Psychiatrists & Clinical Psychologists</h3>
+                    <p><strong>Enforcement Mandate:</strong> Independent Psychiatric Evaluation & Trauma Quantification.</p>
+                    <p><strong>Active Infraction Log:</strong> Exposing the explicit physical truth regarding severe Post-Traumatic Stress Disorder (PTSD) and trauma. This platform hosts Form W.Cl.303 (First Medical Report in Respect of Post-Traumatic Stress Disorder) to completely block any institutional attempts to erase psychiatric trauma from the primary physical spinal injury profile.</p>
+                    <a href="#" class="transparency-link">📂 View Sealed Psychiatric Trauma Evaluations (Dr Kewana)</a>
+                </div>
+                <div class="stakeholder-card">
+                    <h3>2. Corporate-Contracted Practitioners & Evaluators</h3>
+                    <p><strong>Enforcement Mandate:</strong> Hippocratic Oath & Objective, Uncompromised Medical Assessment.</p>
+                    <p><strong>Active Infraction Log:</strong> Operating in bad faith behind closed doors to rush through questionable "medical fitness" clearances. Intentionally omitting concurrent psychiatric data from the master physical injury file, and failing to authorize advanced soft-tissue MRI diagnostic scans to protect corporate insurance liabilities.</p>
+                    <a href="#" class="transparency-link">📂 View HPCSA Ethical Infraction Dossier (Dr Ramushu Case File)</a>
+                </div>
+                <div class="stakeholder-card">
+                    <h3>3. The Health Professions Council of South Africa (HPCSA)</h3>
+                    <p><strong>Enforcement Mandate:</strong> Regulatory Oversight of Medical Practitioner Ethics.</p>
+                    <p><strong>Active Infraction Log:</strong> Excessive delay in resolving formal ethical complaints lodged against treating and corporate-contracted doctors who have manipulated clinical diagnoses to protect corporate bottom lines.</p>
+                    <a href="#" class="transparency-link">📂 View HPCSA Formal Complaints Registry</a>
+                </div>
+            </div>
+
+            <div class="matrix-section">
+                <div class="matrix-section-title">🏢 Section E: Private & Corporate Licensed Entities</div>
+                <div class="stakeholder-card">
+                    <h3>1. Rand Mutual Assurance (RMA)</h3>
+                    <p><strong>Enforcement Mandate:</strong> Licensed Statutory Compensation Insurer (COIDA Section 18).</p>
+                    <p><strong>Active Infraction Log:</strong> Deliberate omission of psychological trauma from formal compensation profiles, and systemic crossing and swapping of physical injury files (Claim ending in -57) with psychiatric files (Claim ending in -62) in an electronic registry to manufacture reasons for claim repudiation.</p>
+                    <a href="#" class="transparency-link">📂 View Evidence of Electronic Claim Swapping</a>
+                </div>
+                <div class="stakeholder-card">
+                    <h3>2. The Employer (Valterra / Former Anglo Platinum Operations)</h3>
+                    <p><strong>Enforcement Mandate:</strong> Corporate Liability & Duty of Care for Workplace Occupational Health Hazards.</p>
+                    <p><strong>Active Infraction Log:</strong> Weaponizing an unfair dismissal to evade long-term statutory pension and medical liabilities. Demanding specialized doctor-signed forms while knowingly recording that only a clinic male nurse was on duty during the primary injury report.</p>
+                    <a href="#" class="transparency-link">📂 View Employer Liability & Dismissal Timeline</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- ==================== PAGE VIEW: CONTACTS ==================== -->
+    <!-- ============================================================= -->
+    <div id="view-contacts" class="page-view">
+        <section class="hero-section">
+            <div class="hero-container">
+                <h1>Contacts: Secure Advisory & Communication</h1>
+                <p>Direct portal containing encrypted email access keys, official pro-bono legal submission paths, and floating WhatsApp communication modules for on-the-record investigative journalists and verified legal practitioners.</p>
+            </div>
+        </section>
+
+        <div class="main-container">
+            <div class="card-grid-3">
+                <div class="contact-card">
+                    <h3>📰 Press & Media Inquiries</h3>
+                    <p>For investigative journalists, newsroom editors, and media producers seeking access to the full media dossier, broadcast-ready evidence, or on-the-record interviews.</p>
+                    <div class="contact-method">
+                        <div>
+                            <strong>📧 Secure Email:</strong><br>
+                            <a href="mailto:press@yourdomain.co.za">press@yourdomain.co.za</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div>
+                            <strong>📱 WhatsApp (On-the-Record Only):</strong><br>
+                            <a href="https://wa.me/27123456789?text=Hello,%20I%20am%20a%20journalist%20contacting%20you%20from%20your%20website." target="_blank">+27 12 345 6789</a>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/27123456789" class="whatsapp-btn" target="_blank">💬 Contact via WhatsApp</a>
+                </div>
+
+                <div class="contact-card">
+                    <h3>⚖️ Pro-Bono Legal Submissions</h3>
+                    <p>For verified legal practitioners, University Law Clinics, and public interest litigators requesting access to restricted case files or offering contingency representation.</p>
+                    <div class="contact-method">
+                        <div>
+                            <strong>📧 Legal Intake Email:</strong><br>
+                            <a href="mailto:legal@yourdomain.co.za">legal@yourdomain.co.za</a>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.85rem; margin-top: 1rem;"><strong>Note:</strong> All legal practitioners must complete the Secure Legal Intake Form below before access to restricted files is granted.</p>
+                    <a onclick="document.getElementById('legal-intake').scrollIntoView({behavior:'smooth'})" class="btn-primary" style="cursor:pointer; margin-top: 1rem; display: inline-block;">🔐 Access Legal Intake Form</a>
+                </div>
+
+                <div class="contact-card">
+                    <h3>🔒 Encrypted Communication</h3>
+                    <p>For whistleblowers, insiders, or stakeholders requiring end-to-end encrypted communication channels beyond standard email or WhatsApp.</p>
+                    <div class="contact-method">
+                        <div>
+                            <strong>📧 ProtonMail (Encrypted):</strong><br>
+                            <a href="mailto:secure@protonmail.com">secure@protonmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div>
+                            <strong>💬 Signal Messenger:</strong><br>
+                            <a href="https://signal.me/#p/+27123456789" target="_blank">+27 12 345 6789</a>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.85rem; margin-top: 1rem;">PGP public key available upon request via ProtonMail.</p>
+                </div>
+            </div>
+
+            <div class="security-notice">
+                <h3>⚠️ Security & Privacy Notice</h3>
+                <p>All communication channels listed above are monitored by an independent Public Relations and Legal Support Framework. To protect the personal space, safety, and health of the claimant, direct personal contact information is not published. All statutory inquiries from stakeholders or regulatory bodies must be directed through the formal contact channels provided on this site.</p>
+            </div>
+
+            <section id="legal-intake" class="legal-intake-section">
+                <h2 class="section-heading" style="margin-top: 0;">🔐 Secure Legal Practitioner Intake Form</h2>
+                <p>This form is strictly for verified legal practitioners, University Law Clinics, and public interest litigators. By submitting this form, you agree to maintain strict confidentiality and comply with the Protection of Personal Information Act (POPIA). Access to the restricted evidence vault will be granted upon verification of your LPC registration and conflict-of-interest clearance.</p>
+
+                <form class="intake-form" action="https://formspree.io/f/YOUR_LEGAL_INTAKE_FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label class="form-label" for="fullName">Full Name & Title *</label>
+                        <input type="text" id="fullName" name="fullName" class="form-control" required placeholder="e.g., Adv. Jane Doe, SC">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="firmName">Law Firm, University Law Clinic, or NGO Name *</label>
+                        <input type="text" id="firmName" name="firmName" class="form-control" required placeholder="e.g., Legal Resources Centre">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="lpcNumber">Legal Practice Council (LPC) Registration Number *</label>
+                        <input type="text" id="lpcNumber" name="lpcNumber" class="form-control" required placeholder="e.g., LPC123456">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Area of Specialization *</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="specialization" value="PAJA"> Promotion of Administrative Justice Act (PAJA) Reviews</label>
+                            <label><input type="checkbox" name="specialization" value="RAF"> Road Accident Fund (RAF) Litigation</label>
+                            <label><input type="checkbox" name="specialization" value="COIDA"> COIDA / Compensation Fund Disputes</label>
+                            <label><input type="checkbox" name="specialization" value="Medical Negligence"> Medical Negligence / HPCSA Matters</label>
+                            <label><input type="checkbox" name="specialization" value="Labour Law"> Labour Law & Unfair Dismissal</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Conflict of Interest Declaration *</label>
+                        <div class="checkbox-group">
+                            <label><input type="radio" name="conflictOfInterest" value="Yes" required> I confirm that neither I nor my firm have represented the RAF, Compensation Fund, Rand Mutual Assurance, or their designated defense attorneys in the past 5 years.</label>
+                            <label><input type="radio" name="conflictOfInterest" value="No"> I have a potential conflict of interest (please explain below).</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="conflictExplanation">If "No" above, please explain the conflict:</label>
+                        <textarea id="conflictExplanation" name="conflictExplanation" class="form-control" placeholder="Provide details of any past or present relationships with state injury funds or defense firms."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="secureContact">Secure Contact Method *</label>
+                        <input type="text" id="secureContact" name="secureContact" class="form-control" required placeholder="Provide a secure email address or encrypted messaging handle (e.g., Signal)">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="message">Brief Statement of Interest (Optional)</label>
+                        <textarea id="message" name="message" class="form-control" placeholder="Briefly describe your interest in this case and how you believe you can assist."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">POPIA & Confidentiality Acknowledgment *</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="popiaAcknowledgment" required> I acknowledge that the materials provided contain sensitive personal and medical information. I agree to use them solely for the purpose of evaluating potential pro-bono or contingency legal representation, and will not distribute them further without explicit written consent. I understand that violation of this agreement may result in legal action under POPIA.</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-action-btn">🔒 Submit Secure Legal Intake</button>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <!-- ==================== GLOBAL FOOTER ==================== -->
+    <footer class="global-footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Legal & Regulatory Notice</h4>
+                <p>This site operates as an objective, independent public accountability archive. All primary evidence consists of verified administrative records, physical medical diagnoses, and undisputed statutory logs.</p>
+                <br>
+                <p>Content is structured in strict compliance with the <strong style="color: var(--text-light);">Protection of Personal Information Act (POPIA)</strong> and mirrors the transparency mandates outlined within the <strong style="color: var(--text-light);">Promotion of Access to Information Act (PAIA)</strong>.</p>
+                <br>
+                <p style="font-size: 0.8rem;">Copyright © 2026 Campaign for Corporate and Statutory Accountability. All Rights Reserved.</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Quick Navigation</h4>
+                <ul class="footer-nav">
+                    <li><a onclick="navigateTo('home')">🏠 Home - Main Campaign Matrix</a></li>
+                    <li><a onclick="navigateTo('about')">📖 About - Operational Mission</a></li>
+                    <li><a onclick="navigateTo('services')">🛠️ Services - Advocacy Toolkit</a></li>
+                    <li><a onclick="navigateTo('projects')">📂 Projects - Active Fronts & Infrastructure</a></li>
+                    <li><a onclick="navigateTo('contacts')">📞 Contacts - Secure Advisory</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <div class="whistleblower-card">
+                    <h4>🔒 Whistleblower Secure Portal</h4>
+                    <p style="color: #E5E7EB; font-size: 0.8rem; margin-bottom: 1rem;">If you are an insider possessing internal proof of systematic file deletion, fraudulent medical reporting, or intentional claim degradation, your identity is legally protected under the <strong style="color: var(--text-light);">Protected Disclosures Act 26 of 2000</strong>.</p>
+                    <div class="security-warning">⚠️ <strong>Security Notice:</strong> Do not access this portal from an employer-owned device or corporate network. This form does not record IP addresses or metadata.</div>
+                    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+                        <label class="wb-label" for="entity">Select Affected Entity:</label>
+                        <select id="entity" name="entity" class="wb-input" required>
+                            <option value="">-- Choose One --</option>
+                            <option value="SAPS">South African Police Service (SAPS)</option>
+                            <option value="Public Protector">Office of the Public Protector</option>
+                            <option value="Trade Union">Workplace Trade Union</option>
+                            <option value="Corporate Medical Practitioner">Corporate Medical Practitioner</option>
+                            <option value="HPCSA">Health Professions Council of SA (HPCSA)</option>
+                            <option value="RMA">Rand Mutual Assurance (RMA)</option>
+                            <option value="Employer">The Employer (Valterra / Anglo Platinum)</option>
+                            <option value="RAF">Road Accident Fund (RAF)</option>
+                            <option value="COIDA">Compensation Fund (COIDA)</option>
+                        </select>
+                        <label class="wb-label" for="description">Describe Administrative Misconduct:</label>
+                        <textarea id="description" name="description" class="wb-input" placeholder="Provide factual details only. Avoid speculation." required></textarea>
+                        <label class="wb-label" for="attachment">📎 Upload Internal Documents:</label>
+                        <input type="file" id="attachment" name="attachment" class="wb-input" accept=".pdf,.png,.jpg,.jpeg" multiple>
+                        <button type="submit" class="wb-submit-btn">🔒 Transmit Encrypted Evidence Anonymously</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>"True transparency is an absolute shield; when you bring the truth out into the open light, you change the battlefield completely."</p>
+        </div>
+    </footer>
+
+    <!-- ==================== WHATSAPP FLOATING ICON ==================== -->
+    <a href="https://wa.me/27123456789?text=Hello,%20I%20am%20contacting%20you%20regarding%20the%20accountability%20campaign." class="whatsapp-float" target="_blank" title="Contact via WhatsApp">💬</a>
+
+    <!-- ==================== DYNAMIC VIEW ENGINE SCRIPT ==================== -->
+    <script>
+        function navigateTo(viewName) {
+            document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active-view'));
+            const targetView = document.getElementById('view-' + viewName);
+            if (targetView) targetView.classList.add('active-view');
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            const activeLink = document.getElementById('link-' + viewName);
+            if (activeLink) activeLink.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Dynamic ticker rotation
+        const tickerMessages = [
+            "🔴 LIVE: Form WG.29 (Section 91 Objection) lodged against RMA • HPCSA ethical complaint against Dr. Ramushu under review",
+            "🔴 LIVE: Public Protector case CMS 93110/2026 filed • RAF statutory deadline expired • 47 documents archived",
+            "🔴 LIVE: 12+ years of documented delay • 3 institutions challenged • 4 active legal fronts in progress",
+            "🔴 LIVE: Employer Valterra / Anglo Platinum dismissal timeline published • Electronic claim swapping evidence logged",
+            "🔴 LIVE: Multimedia Evidence Gallery updated — 4 videos, 8 images, 4 audio recordings now available"
+        ];
+        let tickerIndex = 0;
+        setInterval(() => {
+            tickerIndex = (tickerIndex + 1) % tickerMessages.length;
+            const ticker = document.getElementById('global-ticker-text');
+            if (ticker) {
+                ticker.style.opacity = '0';
+                setTimeout(() => {
+                    ticker.textContent = tickerMessages[tickerIndex];
+                    ticker.style.opacity = '1';
+                }, 300);
+            }
+        }, 8000);
+    </script>
+
+</body>
+</html>i
